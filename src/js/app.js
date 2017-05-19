@@ -56,6 +56,9 @@ What I still need to do - think about how the score is calculated.
 let playerName;
 let playerChosen;
 let villianChosen;
+let playerScore = 10;
+let playerHighscore;
+let villianScore = 10;
 const characters = {
   one: {
     name: 'No1',
@@ -84,9 +87,16 @@ const villians = {
     image: 'public/assets/images/villian.jpg'
   }
 };
-
-let score;
-let highscore;
+const questions = [
+  {
+    question: 'What is 3 + 2?',
+    answer: '5'
+  },
+  {
+    question: 'What is the capital city of the UK?',
+    answer: 'London'
+  }
+];
 
 $(() => {
   function hideWindow1(){
@@ -110,6 +120,7 @@ $(() => {
     $('#name').text(`Hello ${playerName}!`);
     $('.player1-name').text(playerName);
   }
+
   function selectCharacter(){
     $(this).toggleClass('active').siblings().removeClass('active');
     const id = $(this).attr('id');
@@ -122,6 +133,16 @@ $(() => {
   function startTheGame(){
     $('.chosen-character').addClass('hidden');
     $('.game-window').removeClass('hidden');
+    displayScore();
+    showQuestion();
+  }
+  function displayScore(){
+    $('#player1-score').html(playerScore);
+    $('#villian-score').html(villianScore);
+  }
+  function showQuestion(){
+    console.log(questions[0].question);
+    $('#question-place').text(questions[0].question);
   }
 
   $('#instructions').on('click', hideWindow1);
