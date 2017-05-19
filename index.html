@@ -9,7 +9,7 @@
 </head>
 <body>
   <header>
-    <h1>The battle</h1>
+    <h1>Project 0</h1>
   </header>
   <main>
     <div class="welcome">
@@ -27,16 +27,34 @@
       <h2>O hai let's play a game</h2>
       <p>Please choose the character and pls gib ur name</p>
       <div class="choices">
-        <div class="person"><p>No1</p></div>
-        <div class="person"><p>No2</p></div>
-        <div class="person"><p>No3</p></div>
+        <div id="one" class="person"><img src="public/assets/images/gingerkitten.jpg" alt="kitty"><p>No1</p></div>
+        <div id="two" class="person"><img src="public/assets/images/gingerkitten.jpg" alt="kitty"><p>No2</p></div>
+        <div id="three" class="person"><img src="public/assets/images/gingerkitten.jpg" alt="kitty"><p>No3</p></div>
       </div>
       <form>
         <label>Your name goes here :) </label>
         <input class="name" type="text">
-        <input class="submit" type="submit">
       </form>
       <button id="start">Start the battle</button>
+    </div>
+    <div class="chosen-character hidden">
+      <h2>Hello again</h2>
+      <p id="name"></p>
+      <img>
+      <button id="kick-off">Let's kick off</button>
+    </div>
+    <div class="game-window hidden">
+      <h2>Let's get ready to rumble</h2>
+      <div class="player-corner">
+      <img class="player1">
+      <p class="player1-name"></p>
+      <p>Score:<span id="player1-score"></span></p>
+    </div>
+    <div class="villian-corner">
+      <img class="villian">
+      <p class="villian-name"></p>
+      <p>Score:<span id="villian-score"></span></p>
+    </div>
     </div>
   </main>
 </body>
