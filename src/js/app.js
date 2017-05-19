@@ -56,9 +56,10 @@ What I still need to do - think about how the score is calculated.
 let playerName;
 let playerChosen;
 let villianChosen;
-let playerScore = 10;
+let playerLife = 10;
 let playerHighscore;
-let villianScore = 10;
+let villianLife = 10;
+let answer;
 const characters = {
   one: {
     name: 'No1',
@@ -95,6 +96,10 @@ const questions = [
   {
     question: 'What is the capital city of the UK?',
     answer: 'London'
+  },
+  {
+    question: 'Are doplhins mammals?',
+    answer: 'Yes'
   }
 ];
 
@@ -117,6 +122,9 @@ $(() => {
   }
   function getTheName(){
     playerName = $(this).val();
+    if (playerName.length === 0){
+      alert('test');
+    }
     $('#name').text(`Hello ${playerName}!`);
     $('.player1-name').text(playerName);
   }
@@ -124,6 +132,9 @@ $(() => {
   function selectCharacter(){
     $(this).toggleClass('active').siblings().removeClass('active');
     const id = $(this).attr('id');
+    if(id){
+      $('#start').attr('disabled', false);
+    }
     playerChosen = characters[id];
     $('.chosen-character img, .player1').attr('src', playerChosen.image);
     villianChosen = villians[id];
@@ -137,12 +148,31 @@ $(() => {
     showQuestion();
   }
   function displayScore(){
-    $('#player1-score').html(playerScore);
-    $('#villian-score').html(villianScore);
+    $('#player1-score').html(playerLife);
+    $('#villian-score').html(villianLife);
   }
+  let currentQuestion = 0
   function showQuestion(){
-    console.log(questions[0].question);
-    $('#question-place').text(questions[0].question);
+    console.log(questions[currentQuestion].question);
+    $('#question-place').text(questions[currentQuestion].question);
+  }
+  function getAnswer(){
+    answer = $(this).val();
+    console.log(answer);
+    if (answer === questions[currentQuestion].answer){
+      console.log('haha!');
+      villianLife -= 1;
+      playerLife += 1;
+      currentQuestion += 1;
+      answer = $(this).val('');
+      console.log(currentQuestion);
+      showQuestion();
+      displayScore();
+    }
+    else('fail');
+    playerLife -= 1;
+    showQuestion();
+    displayScore();
   }
 
   $('#instructions').on('click', hideWindow1);
@@ -152,5 +182,5 @@ $(() => {
   $('.name').on('keyup', getTheName);
   $('.person').on('click', selectCharacter);
   $('#kick-off').on('click', startTheGame);
-
+  $('#answer').on('keyup', getAnswer);
 });
