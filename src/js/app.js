@@ -4,6 +4,8 @@ let villianChosen;
 let playerLife = 20;
 let villianLife = 20;
 let turn = true;
+let roundResultText;
+
 const characters = {
   one: {
     name: 'Nick',
@@ -74,6 +76,9 @@ $(() => {
   }
   function getTheName(){
     playerName = $(this).val();
+    if (playerName.length === 0){
+      playerName = playerChosen.name;
+    }
     $('#name').text(`Hello ${playerName}!`);
     $('.player1-name').text(playerName);
   }
@@ -101,10 +106,11 @@ $(() => {
     if(turn === true){
       if(Math.random() < playerChosen.accuracy){
         villianLife -= playerChosen.attack;
-        $('#battle-text').text('You have hit him!');
+        roundResultText = 'You have hit him!';
       } else{
-        $('#battle-text').text('Whooops! A miss...');
+        roundResultText = 'Whooops! A miss...';
       }
+      $('#battle-text').text(`${roundResultText}`);
       turn = false;
       console.log(turn);
       checkForWinner();
@@ -114,28 +120,36 @@ $(() => {
     }
   }
   function attackPlayer(){
+    whoseTurn();
     if(turn === false){
       if(Math.random() < villianChosen.accuracy){
         playerLife -= villianChosen.attack;
-        $('#battle-text').text('Crap! He hit you!');
+        roundResultText = 'Crap! He hit you!';
       } else{
-        $('#battle-text').text('Lucky u! This time it is a miss and you are safe!');
+        roundResultText = 'Lucky u! This time it is a miss and you are safe!';
       }
+      $('#battle-text').text(`${roundResultText}`);
       checkForWinner();
       turn = true;
       console.log(turn);
+      whoseTurn();
     }
   }
   function checkForWinner(){
     if (playerLife <= 0){
-      console.log('You looser!');
       $('#winner').text('He killed you :(').css({'color': 'red', 'font-size': '30px'});
       turn = true;
     }
     if(villianLife <= 0){
-      console.log('You won!');
       $('#winner').text('You won!!! Ta-da!!').css({'color': 'red', 'font-size': '30px'});
       turn = true;
+    }
+  }
+  function whoseTurn(){
+    if (turn === false){
+      console.log('not your turn');
+    } else{
+      console.log('your turn babe');
     }
   }
   function defend(){
