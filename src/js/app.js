@@ -1,20 +1,20 @@
 let playerName;
 let playerChosen;
 let villianChosen;
-let playerLife = 10;
-let villianLife = 10;
+let playerLife = 20;
+let villianLife = 20;
 let turn = true;
 const characters = {
   one: {
-    name: 'No1',
-    image: 'public/assets/images/player3.jpg',
+    name: 'Nick',
+    image: 'public/assets/images/player1.gif',
     attack: 4,
     warCry: 2,
     defend: 4,
     accuracy: 0.4
   },
   two: {
-    name: 'No2',
+    name: 'Ellen',
     image: 'public/assets/images/player2.gif',
     attack: 5,
     warCry: 2,
@@ -32,19 +32,19 @@ const characters = {
 };
 const villians = {
   one: {
-    name: 'Villian No1',
+    name: 'Henry',
     image: 'public/assets/images/villian3.jpg',
     attack: 5,
     accuracy: 0.5
   },
   two: {
-    name: 'Villian No2',
+    name: 'Xenomorph',
     image: 'public/assets/images/villian2.gif',
     attack: 6,
     accuracy: 0.6
   },
   three: {
-    name: 'Villian No3',
+    name: 'Henry',
     image: 'public/assets/images/villian3.jpg',
     attack: 4,
     accuracy: 0.56
@@ -74,9 +74,6 @@ $(() => {
   }
   function getTheName(){
     playerName = $(this).val();
-    if (playerName.length === 0){
-      alert('test');
-    }
     $('#name').text(`Hello ${playerName}!`);
     $('.player1-name').text(playerName);
   }
@@ -88,36 +85,42 @@ $(() => {
       $('#start').attr('disabled', false);
     }
     playerChosen = characters[id];
-    $('.chosen-character img, .player1').attr('src', playerChosen.image);
     villianChosen = villians[id];
+    $('.chosen-character img, .player1').attr('src', playerChosen.image);
     $('.villian').attr('src', villianChosen.image);
     $('.villian-name').text(villianChosen.name);
   }
   function displayScore(){
-    $('#player1-score').html(playerLife);
-    $('#villian-score').html(villianLife);
+    setInterval(() => {
+      $('#player1-score').html(playerLife);
+      $('#villian-score').html(villianLife);
+    }, 500);
   }
 
   function attackVillian(){
     if(turn === true){
       if(Math.random() < playerChosen.accuracy){
         villianLife -= playerChosen.attack;
+        $('#battle-text').text('You have hit him!');
+      } else{
+        $('#battle-text').text('Whooops! A miss...');
       }
       turn = false;
       console.log(turn);
-      displayScore();
       checkForWinner();
       setTimeout(() => {
         attackPlayer();
-      }, 1000);
+      }, 2000);
     }
   }
   function attackPlayer(){
     if(turn === false){
       if(Math.random() < villianChosen.accuracy){
         playerLife -= villianChosen.attack;
+        $('#battle-text').text('Crap! He hit you!');
+      } else{
+        $('#battle-text').text('Lucky u! This time it is a miss and you are safe!');
       }
-      displayScore();
       checkForWinner();
       turn = true;
       console.log(turn);
@@ -138,19 +141,25 @@ $(() => {
     console.log(villianChosen.attack);
     villianChosen.attack -= playerChosen.defend;
     console.log(villianChosen.attack);
-    attackPlayer();
-    villianChosen.attack += playerChosen.defend;
-    console.log(villianChosen.attack);
+    setTimeout(() => {
+      attackPlayer();
+      villianChosen.attack += playerChosen.defend;
+      console.log(villianChosen.attack);
+    }, 2000);
   }
   function warCry(){
     turn = false;
     console.log(playerChosen.attack);
     playerChosen.attack += playerChosen.warCry;
     console.log(playerChosen.attack);
-    attackPlayer();
-    attackVillian();
-    playerChosen.attack -= playerChosen.warCry;
-    console.log(playerChosen.attack);
+    setTimeout(() => {
+      attackPlayer();
+    }, 2000);
+    setTimeout(() => {
+      attackVillian();
+      playerChosen.attack -= playerChosen.warCry;
+      console.log(playerChosen.attack);
+    }, 3000);
   }
   $('#instructions').on('click', hideWindow1);
   $('#back').on('click', hideWindow2);

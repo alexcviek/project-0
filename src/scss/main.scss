@@ -26,7 +26,6 @@ main{
     margin: 45px auto;
     width: 500px;
     height: 500px;
-    border: 2px solid black;
     h2, p, button, label{
       text-align: center;
       font-family: 'Jura', sans-serif;
@@ -44,6 +43,9 @@ main{
       padding: 5px 20px;
       border: 2px solid black;
       border-radius: 5px;
+    }
+    label{
+      border: none;
     }
     button:hover{
       background-color: #fff;
@@ -78,21 +80,25 @@ main{
     margin: 45px auto;
     width: 800px;
     height: 500px;
-    border: 2px solid black;
     button{
-      display: inline;
+      display: inline-block;
+      margin-left: 120px;
     }
     img{
       max-width: 150px;
+      margin-left: 55px;
     }
     .players-display{
       height: 300px;
-      border: 2px solid pink;
       .player-corner{
         float: left;
+        width: 33%;
+        img{
+        }
       }
       .villian-corner{
         float: right;
+        width: 33%;
       }
     }
   }
