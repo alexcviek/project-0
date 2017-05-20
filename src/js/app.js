@@ -7,7 +7,7 @@ let turn = true;
 const characters = {
   one: {
     name: 'No1',
-    image: 'public/assets/images/gingerkitten.jpg',
+    image: 'public/assets/images/player3.jpg',
     attack: 4,
     warCry: 2,
     defend: 4,
@@ -15,7 +15,7 @@ const characters = {
   },
   two: {
     name: 'No2',
-    image: 'public/assets/images/gingerkitten.jpg',
+    image: 'public/assets/images/player2.gif',
     attack: 5,
     warCry: 2,
     defend: 5,
@@ -23,7 +23,7 @@ const characters = {
   },
   three: {
     name: 'No3',
-    image: 'public/assets/images/gingerkitten.jpg',
+    image: 'public/assets/images/player3.jpg',
     attack: 6,
     warCry: 1,
     defend: 2,
@@ -33,27 +33,27 @@ const characters = {
 const villians = {
   one: {
     name: 'Villian No1',
-    image: 'public/assets/images/villian.jpg',
+    image: 'public/assets/images/villian3.jpg',
     attack: 5,
     accuracy: 0.5
   },
   two: {
     name: 'Villian No2',
-    image: 'public/assets/images/villian.jpg',
+    image: 'public/assets/images/villian2.gif',
     attack: 6,
     accuracy: 0.6
   },
   three: {
     name: 'Villian No3',
-    image: 'public/assets/images/villian.jpg',
+    image: 'public/assets/images/villian3.jpg',
     attack: 4,
     accuracy: 0.56
   }
 };
 $(() => {
   function hideWindow1(){
-    $('.welcome').addClass('hidden');
     $('.instructions').removeClass('hidden');
+    $('.welcome').addClass('hidden');
   }
   function hideWindow2(){
     $('.instructions').addClass('hidden');
@@ -67,6 +67,11 @@ $(() => {
     $('.character').addClass('hidden');
     $('.chosen-character').removeClass('hidden');
   }
+  function startTheGame(){
+    $('.chosen-character').fadeOut('slow').addClass('hidden');
+    $('.game-window').fadeIn('slow').removeClass('hidden');
+    displayScore();
+  }
   function getTheName(){
     playerName = $(this).val();
     if (playerName.length === 0){
@@ -77,7 +82,7 @@ $(() => {
   }
 
   function selectCharacter(){
-    $(this).toggleClass('active').siblings().removeClass('active');
+    $(this).addClass('active').siblings().removeClass('active');
     const id = $(this).attr('id');
     if(id){
       $('#start').attr('disabled', false);
@@ -87,11 +92,6 @@ $(() => {
     villianChosen = villians[id];
     $('.villian').attr('src', villianChosen.image);
     $('.villian-name').text(villianChosen.name);
-  }
-  function startTheGame(){
-    $('.chosen-character').addClass('hidden');
-    $('.game-window').removeClass('hidden');
-    displayScore();
   }
   function displayScore(){
     $('#player1-score').html(playerLife);
@@ -130,13 +130,27 @@ $(() => {
     }
     if(villianLife <= 0){
       console.log('You won!');
+      turn = true;
     }
   }
   function defend(){
     turn = false;
-    villianChosen.attack - playerChosen.defend;
+    console.log(villianChosen.attack);
+    villianChosen.attack -= playerChosen.defend;
     console.log(villianChosen.attack);
     attackPlayer();
+    villianChosen.attack += playerChosen.defend;
+    console.log(villianChosen.attack);
+  }
+  function warCry(){
+    turn = false;
+    console.log(playerChosen.attack);
+    playerChosen.attack += playerChosen.warCry;
+    console.log(playerChosen.attack);
+    attackPlayer();
+    attackVillian();
+    playerChosen.attack -= playerChosen.warCry;
+    console.log(playerChosen.attack);
   }
   $('#instructions').on('click', hideWindow1);
   $('#back').on('click', hideWindow2);
@@ -146,5 +160,6 @@ $(() => {
   $('.person').on('click', selectCharacter);
   $('#kick-off').on('click', startTheGame);
   $('#attack').on('click', attackVillian);
+  $('#warcry').on('click', warCry);
   $('#defend').on('click', defend);
 });
