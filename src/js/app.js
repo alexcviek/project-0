@@ -70,7 +70,7 @@ $(() => {
   function startTheGame(){
     $('.chosen-character').fadeOut('slow').addClass('hidden');
     $('.game-window').fadeIn('slow').removeClass('hidden');
-    displayScore();
+    displayHealth();
   }
   function getTheName(){
     playerName = $(this).val();
@@ -90,7 +90,7 @@ $(() => {
     $('.villian').attr('src', villianChosen.image);
     $('.villian-name').text(villianChosen.name);
   }
-  function displayScore(){
+  function displayHealth(){
     setInterval(() => {
       $('#player1-score').html(playerLife);
       $('#villian-score').html(villianLife);
@@ -129,10 +129,12 @@ $(() => {
   function checkForWinner(){
     if (playerLife <= 0){
       console.log('You looser!');
+      $('#winner').text('He killed you :(').css({'color': 'red', 'font-size': '30px'});
       turn = true;
     }
     if(villianLife <= 0){
       console.log('You won!');
+      $('#winner').text('You won!!! Ta-da!!').css({'color': 'red', 'font-size': '30px'});
       turn = true;
     }
   }
