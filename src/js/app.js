@@ -7,6 +7,9 @@ let turn = true;
 let roundText;
 let round = 1;
 let score = 0;
+// const $highScore = $('.high-score');
+// let highScore = localStorage.getItem('highScore') || 0;
+// $highScore.text(highScore);
 
 const characters = {
   one: {
@@ -76,6 +79,7 @@ $(() => {
     $('.game-window').fadeIn('slow').removeClass('hidden');
     displayHealth();
     displayScore();
+    displayRound();
   }
   function getTheName(){
     playerName = $(this).val();
@@ -102,6 +106,11 @@ $(() => {
     setInterval(() => {
       $('#player-health').html(playerLife);
       $('#villian-score').html(villianLife);
+      $('h1').text(`Round ${round}`);
+    }, 500);
+  }
+  function displayRound(){
+    setInterval(() => {
       $('h1').text(`Round ${round}`);
     }, 500);
   }
