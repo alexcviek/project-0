@@ -5,6 +5,7 @@ let playerLife = 20;
 let villianLife = 20;
 let turn = true;
 let roundResultText;
+let round = 1;
 
 const characters = {
   one: {
@@ -18,7 +19,7 @@ const characters = {
   two: {
     name: 'Ellen',
     image: 'public/assets/images/player2.gif',
-    attack: 5,
+    attack: 7,
     warCry: 2,
     defend: 5,
     accuracy: 0.5
@@ -42,7 +43,7 @@ const villians = {
   two: {
     name: 'Xenomorph',
     image: 'public/assets/images/villian2.gif',
-    attack: 6,
+    attack: 1,
     accuracy: 0.6
   },
   three: {
@@ -99,6 +100,7 @@ $(() => {
     setInterval(() => {
       $('#player1-score').html(playerLife);
       $('#villian-score').html(villianLife);
+      $('h1').text(`Round ${round}`);
     }, 500);
   }
 
@@ -142,8 +144,11 @@ $(() => {
       turn = true;
     }
     if(villianLife <= 0){
-      $('#winner').text('You won!!! Ta-da!!').css({'color': 'red', 'font-size': '30px'});
+      $('#winner').text('You won this round!!! Ta-da!!').css({'color': 'red', 'font-size': '30px'});
       turn = true;
+      setTimeout(() => {
+        nextRound();
+      }, 2000);
     }
   }
   function whoseTurn(){
@@ -157,7 +162,11 @@ $(() => {
     }
   }
   function nextRound(){
-
+    console.log('Round 2!');
+    round += 1;
+    villianLife = 25 * round;
+    playerLife = 20  * round;
+    $('#winner').text('');
   }
   function defend(){
     turn = false;
