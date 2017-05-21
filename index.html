@@ -33,7 +33,7 @@
       <div class="choices">
         <div id="one" class="person"><img src="public/assets/images/player1.gif" alt="char1"><p>Nick</p></div>
         <div id="two" class="person"><img src="public/assets/images/player2.gif" alt="char2"><p>Ellen</p></div>
-        <div id="three" class="person"><img src="public/assets/images/player3.jpg" alt="char3"><p>No3</p></div>
+        <div id="three" class="person"><img src="public/assets/images/player3.gif" alt="char3"><p>Nick2</p></div>
       </div>
       <form>
         <label>Your name</label>
@@ -52,22 +52,23 @@
         <div class="player-corner">
           <img class="player1">
           <p class="player1-name"></p>
-          <p>Health:<span id="player1-score"></span></p>
+          <p>Health:<span id="player-health"></span></p>
+          <p>Score:<span id="player-score"></span></p>
+          </div>
+          <div class="villian-corner">
+            <img class="villian">
+            <p class="villian-name"></p>
+            <p>Health:<span id="villian-score"></span></p>
+          </div>
         </div>
-        <div class="villian-corner">
-          <img class="villian">
-          <p class="villian-name"></p>
-          <p>Health:<span id="villian-score"></span></p>
-        </div>
-      </div>
-      <div class="battle-display">
+        <div class="battle-display">
           <button id="attack">Attack</button>
           <button id="warcry">War Cry</button>
           <button id="defend">Defend</button>
-        <p id="battle-text"></p>
-        <p id="winner"></p>
+          <p id="battle-text"></p>
+          <p id="winner"></p>
+        </div>
       </div>
-    </div>
-  </main>
-</body>
-</html>
+    </main>
+  </body>
+  </html>

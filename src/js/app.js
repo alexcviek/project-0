@@ -4,8 +4,9 @@ let villianChosen;
 let playerLife = 20;
 let villianLife = 20;
 let turn = true;
-let roundResultText;
+let roundText;
 let round = 1;
+let score = 0;
 
 const characters = {
   one: {
@@ -19,14 +20,14 @@ const characters = {
   two: {
     name: 'Ellen',
     image: 'public/assets/images/player2.gif',
-    attack: 7,
+    attack: 10,
     warCry: 2,
     defend: 5,
-    accuracy: 0.5
+    accuracy: 0.7
   },
   three: {
-    name: 'No3',
-    image: 'public/assets/images/player3.jpg',
+    name: 'Mutant Nick',
+    image: 'public/assets/images/player3.gif',
     attack: 6,
     warCry: 1,
     defend: 2,
@@ -47,8 +48,8 @@ const villians = {
     accuracy: 0.6
   },
   three: {
-    name: 'Henry',
-    image: 'public/assets/images/villian3.jpg',
+    name: 'Medusa',
+    image: 'public/assets/images/villian3.gif',
     attack: 4,
     accuracy: 0.56
   }
@@ -74,6 +75,7 @@ $(() => {
     $('.chosen-character').fadeOut('slow').addClass('hidden');
     $('.game-window').fadeIn('slow').removeClass('hidden');
     displayHealth();
+    displayScore();
   }
   function getTheName(){
     playerName = $(this).val();
@@ -98,9 +100,14 @@ $(() => {
   }
   function displayHealth(){
     setInterval(() => {
-      $('#player1-score').html(playerLife);
+      $('#player-health').html(playerLife);
       $('#villian-score').html(villianLife);
       $('h1').text(`Round ${round}`);
+    }, 500);
+  }
+  function displayScore(){
+    setInterval(() => {
+      $('#player-score').html(score);
     }, 500);
   }
 
@@ -108,17 +115,17 @@ $(() => {
     if(turn === true){
       if(Math.random() < playerChosen.accuracy){
         villianLife -= playerChosen.attack;
-        roundResultText = 'You have hit him!';
+        score += 5;
+        roundText = 'You have hit him!';
       } else{
-        roundResultText = 'Whooops! A miss...';
+        roundText = 'Whooops! A miss...';
       }
-      $('#battle-text').text(`${roundResultText}`);
+      $('#battle-text').text(`${roundText}`);
       turn = false;
-      console.log(turn);
       checkForWinner();
       setTimeout(() => {
         attackPlayer();
-      }, 2000);
+      }, 3000);
     }
   }
   function attackPlayer(){
@@ -126,21 +133,43 @@ $(() => {
     if(turn === false){
       if(Math.random() < villianChosen.accuracy){
         playerLife -= villianChosen.attack;
-        roundResultText = 'Crap! He hit you!';
+        roundText = 'Crap! He hit you!';
       } else{
-        roundResultText = 'Lucky u! This time it is a miss and you are safe!';
+        roundText = 'Lucky u! This time it is a miss and you are safe!';
       }
-      $('#battle-text').text(`${roundResultText}`);
+      $('#battle-text').text(`${roundText}`);
       checkForWinner();
       turn = true;
-      console.log(turn);
       whoseTurn();
     }
   }
+  function defend(){
+    turn = false;
+    villianChosen.attack -= playerChosen.defend;
+    setTimeout(() => {
+      attackPlayer();
+      villianChosen.attack += playerChosen.defend;
+    }, 2000);
+  }
+  function warCry(){
+    turn = false;
+    console.log(playerChosen.attack);
+    playerChosen.attack += playerChosen.warCry;
+    console.log(playerChosen.attack);
+    setTimeout(() => {
+      attackPlayer();
+    }, 2000);
+    setTimeout(() => {
+      attackVillian();
+      playerChosen.attack -= playerChosen.warCry;
+      console.log(playerChosen.attack);
+    }, 3000);
+  }
   function checkForWinner(){
     if (playerLife <= 0){
-      $('#winner').text('GAME OVER. He killed you :(').css({'color': 'red', 'font-size': '30px'});
+      $('#winner').text('GAME OVER').css({'color': 'red', 'font-size': '30px'});
       $('#attack, #warcry, #defend').attr('disabled', true);
+      $('.game-over').removeClass('hidden');
       turn = true;
     }
     if(villianLife <= 0){
@@ -166,32 +195,9 @@ $(() => {
     round += 1;
     villianLife = 25 * round;
     playerLife = 20  * round;
+    roundText = '';
     $('#winner').text('');
-  }
-  function defend(){
-    turn = false;
-    console.log(villianChosen.attack);
-    villianChosen.attack -= playerChosen.defend;
-    console.log(villianChosen.attack);
-    setTimeout(() => {
-      attackPlayer();
-      villianChosen.attack += playerChosen.defend;
-      console.log(villianChosen.attack);
-    }, 2000);
-  }
-  function warCry(){
-    turn = false;
-    console.log(playerChosen.attack);
-    playerChosen.attack += playerChosen.warCry;
-    console.log(playerChosen.attack);
-    setTimeout(() => {
-      attackPlayer();
-    }, 2000);
-    setTimeout(() => {
-      attackVillian();
-      playerChosen.attack -= playerChosen.warCry;
-      console.log(playerChosen.attack);
-    }, 3000);
+    $('#battle-text').text(`${roundText}`);
   }
   $('#instructions').on('click', hideWindow1);
   $('#back').on('click', hideWindow2);
