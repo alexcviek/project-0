@@ -93,7 +93,8 @@ main{
       .player-corner{
         float: left;
         width: 33%;
-        img{
+        .img-active{
+          border: 3px solid red;
         }
       }
       .villian-corner{

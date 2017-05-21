@@ -137,7 +137,8 @@ $(() => {
   }
   function checkForWinner(){
     if (playerLife <= 0){
-      $('#winner').text('He killed you :(').css({'color': 'red', 'font-size': '30px'});
+      $('#winner').text('GAME OVER. He killed you :(').css({'color': 'red', 'font-size': '30px'});
+      $('#attack, #warcry, #defend').attr('disabled', true);
       turn = true;
     }
     if(villianLife <= 0){
@@ -148,9 +149,15 @@ $(() => {
   function whoseTurn(){
     if (turn === false){
       console.log('not your turn');
-    } else{
+      // $('.player-corner img').removeClass('img-active');
+    } else {
       console.log('your turn babe');
+      // $('.player-corner').append('<p>Your turn</p>');
+      // $('.player-corner img').addClass('img-active');
     }
+  }
+  function nextRound(){
+
   }
   function defend(){
     turn = false;
