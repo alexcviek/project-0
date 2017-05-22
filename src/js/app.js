@@ -23,11 +23,11 @@ $(() => {
     two: {
       name: 'Ellen',
       image: 'public/assets/images/player2.gif',
-      attack: 5,
-      currentAttack: 5,
+      attack: 10,
+      currentAttack: 10,
       warCry: 5,
       defend: 5,
-      accuracy: 0.4
+      accuracy: 0.8
     },
     three: {
       name: 'Mutant Nick',
@@ -80,6 +80,7 @@ $(() => {
   const $backToMenu = $('#back-to-menu');
   const $score = $('#player-score');
   const $highScore = $('.high-score');
+  const $audio = $('audio');
 
   function hideWindow1(){
     $instructions.removeClass('hidden');
@@ -151,13 +152,15 @@ $(() => {
       $score.html(score);
     }, 500);
   }
-  
+
   function attackVillian(){
     if(turn === true){
       if(Math.random() < playerChosen.accuracy){
         villianLife -= playerChosen.currentAttack;
         score += playerChosen.currentAttack;
         roundText = 'You have hit him!';
+        $audio.attr('src','public/assets/audio/punch.wav');
+        console.log($audio);
       } else{
         roundText = 'Whooops! A miss...';
       }
@@ -245,6 +248,7 @@ $(() => {
     villianLife = 20;
     round = 1;
     score = 0;
+    playerChosen.currentAttack = playerChosen.attack;
     turn = true;
   }
   function newGame(){

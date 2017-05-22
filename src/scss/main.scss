@@ -20,7 +20,7 @@ header{
 }
 main{
   margin: 0 auto;
-  max-width: 900px;
+  max-width: 700px;
   height: 500px;
   border: 2px solid #424242;
   .welcome, .instructions, .character-screen, .chosen-character, .game-window, .game-over{
@@ -80,11 +80,11 @@ main{
   }
   .game-window{
     margin: 45px auto;
-    width: 800px;
+    width: 700px;
     height: 460px;
     button{
       display: inline-block;
-      margin: 10px 0 0 130px;
+      margin: 10px 0 0 107px;
     }
     img{
       max-width: 150px;
@@ -106,6 +106,7 @@ main{
         }
         img{
           float: left;
+          margin-left: 20px;
         }
       }
       .villian-section{
@@ -113,6 +114,7 @@ main{
         width: 40%;
         img{
           float: right;
+          margin-right: 20px;
         }
 
       }
@@ -149,4 +151,62 @@ main{
 .fadeOutUp {
   -webkit-animation-name: fadeOutUp;
   animation-name: fadeOutUp;
+}
+@media only screen and (max-width: 667px) {
+  header{
+    display: none;
+  }
+  main{
+    margin: 5px auto;
+    max-width: 500px;
+    height: 350px;
+    .welcome, .instructions, .character-screen, .chosen-character, .game-window, .game-over{
+      margin: 5px auto;
+      width: 500px;
+      height: 350px;
+      img{
+        max-width: 80px;
+      }
+      h2{
+        font-size: 20px;
+      }
+      p{
+        font-size: 12px;
+      }
+      button{
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+    }
+    .character-screen{
+      height: 400px;
+      .choices{
+        border: none;
+      }
+    }
+    .chosen-character{
+      img{
+        max-width: 100px;
+        position: relative;
+        left: 40%;
+      }
+    }
+    .game-window{
+      button{
+        display: inline-block;
+        margin-left: 80px;
+      }
+      img{
+        max-width: 100px;
+        margin-top: 10px;
+      }
+      .players-display{
+        p{
+          margin-top: 10px;
+          line-height: 12px;
+          font-size: 10px;
+        }
+      }
+    }
+  }
 }
