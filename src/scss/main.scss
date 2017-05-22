@@ -90,7 +90,13 @@ main{
     .players-display{
       height: 180px;
       display: block;
+      p{
+        line-height: 15px;
+        margin-top: 5px;
+        font-size: 17px;
+      }
       .player-section{
+        line-height: 10px;
         float: left;
         width: 40%;
         .img-active{

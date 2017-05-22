@@ -105,8 +105,8 @@ $(() => {
     if (playerName.length === 0){
       alert('You must provide your name');
     }
-    $('#name').text(`Hello ${playerName}!`);
-    $('.player1-name').text(playerName);
+    $('#name').text(`Get ready, ${playerName}!`);
+    $('.player-name').text(playerName);
   }
 
   function selectCharacter(){
@@ -117,7 +117,7 @@ $(() => {
     }
     playerChosen = characters[id];
     villianChosen = villians[id];
-    $('.chosen-character img, .player1').attr('src', playerChosen.image);
+    $('.chosen-character img, .player').attr('src', playerChosen.image);
     $('.villian').attr('src', villianChosen.image);
     $('.villian-name').text(villianChosen.name);
   }
