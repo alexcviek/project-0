@@ -22,7 +22,7 @@ main{
   max-width: 900px;
   height: 600px;
   border: 2px solid black;
-  .welcome, .instructions, .character, .chosen-character, .game-window{
+  .welcome, .instructions, .character, .chosen-character, .game-window, .game-over{
     margin: 45px auto;
     width: 500px;
     height: 500px;
@@ -94,7 +94,7 @@ main{
         float: left;
         width: 40%;
         .img-active{
-          border: 3px solid red;
+          border: 5px solid #204215;
         }
         img{
           float: left;

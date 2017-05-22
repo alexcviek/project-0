@@ -50,7 +50,7 @@
     <div class="game-window hidden">
       <div class="players-display">
         <div class="player-corner">
-          <img class="player1">
+          <img class="player1 img-active">
           <p class="player1-name"></p>
           <p>Health:<span id="player-health"></span></p>
           <p>Score:<span id="player-score"></span></p>
@@ -69,6 +69,12 @@
           <p id="battle-text"></p>
           <p id="winner"></p>
         </div>
+      </div>
+      <div class="game-over hidden">
+        <h2>Game over!</h2>
+        <p>Play again?</p>
+        <button id="yes">Yes</button>
+        <button id="no">No</button>
       </div>
     </main>
   </body>

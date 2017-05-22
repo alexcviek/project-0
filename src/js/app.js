@@ -23,7 +23,7 @@ const characters = {
   two: {
     name: 'Ellen',
     image: 'public/assets/images/player2.gif',
-    attack: 10,
+    attack: 1,
     warCry: 2,
     defend: 5,
     accuracy: 0.7
@@ -47,7 +47,7 @@ const villians = {
   two: {
     name: 'Xenomorph',
     image: 'public/assets/images/villian2.gif',
-    attack: 1,
+    attack: 10,
     accuracy: 0.6
   },
   three: {
@@ -75,8 +75,8 @@ $(() => {
     $('.chosen-character').removeClass('hidden');
   }
   function startTheGame(){
-    $('.chosen-character').fadeOut('slow').addClass('hidden');
-    $('.game-window').fadeIn('slow').removeClass('hidden');
+    $('.chosen-character').addClass('hidden');
+    $('.game-window').removeClass('hidden');
     displayHealth();
     displayScore();
     displayRound();
@@ -131,6 +131,7 @@ $(() => {
       }
       $('#battle-text').text(`${roundText}`);
       turn = false;
+      whoseTurn();
       checkForWinner();
       setTimeout(() => {
         attackPlayer();
@@ -138,7 +139,6 @@ $(() => {
     }
   }
   function attackPlayer(){
-    whoseTurn();
     if(turn === false){
       if(Math.random() < villianChosen.accuracy){
         playerLife -= villianChosen.attack;
@@ -176,9 +176,7 @@ $(() => {
   }
   function checkForWinner(){
     if (playerLife <= 0){
-      $('#winner').text('GAME OVER').css({'color': 'red', 'font-size': '30px'});
-      $('#attack, #warcry, #defend').attr('disabled', true);
-      $('.game-over').removeClass('hidden');
+      gameOver();
       turn = true;
     }
     if(villianLife <= 0){
@@ -192,11 +190,11 @@ $(() => {
   function whoseTurn(){
     if (turn === false){
       console.log('not your turn');
-      // $('.player-corner img').removeClass('img-active');
-    } else {
-      console.log('your turn babe');
-      // $('.player-corner').append('<p>Your turn</p>');
-      // $('.player-corner img').addClass('img-active');
+      $('.player-corner img').removeClass('img-active');
+    }
+    if (turn === true){
+      console.log('your turn');
+      $('.player-corner img').addClass('img-active');
     }
   }
   function nextRound(){
@@ -208,6 +206,27 @@ $(() => {
     $('#winner').text('');
     $('#battle-text').text(`${roundText}`);
   }
+  function gameOver(){
+    $('.game-window').addClass('hidden');
+    $('.game-over').removeClass('hidden');
+  }
+  function resetData(){
+    roundText = '';
+    playerLife = 20;
+    villianLife = 20;
+    round = 1;
+    score = 0;
+  }
+  function newGame(){
+    $('.game-over').addClass('hidden');
+    resetData();
+    startTheGame();
+  }
+  function backToMenu(){
+    $('.game-over').addClass('hidden');
+    $('.welcome').removeClass('hidden');
+    resetData();
+  }
   $('#instructions').on('click', hideWindow1);
   $('#back').on('click', hideWindow2);
   $('#play').on('click', goToPlayScreen);
@@ -218,4 +237,6 @@ $(() => {
   $('#attack').on('click', attackVillian);
   $('#warcry').on('click', warCry);
   $('#defend').on('click', defend);
+  $('#yes').on('click', newGame);
+  $('#no').on('click', backToMenu);
 });
