@@ -55,7 +55,7 @@ main{
       height: 200px;
       margin: 0 auto;
       border: 2px solid black;
-      .person{
+      .character{
         width: 100px;
         height: 100px;
         display: inline-block;
@@ -90,7 +90,7 @@ main{
     .players-display{
       height: 180px;
       display: block;
-      .player-corner{
+      .player-section{
         float: left;
         width: 40%;
         .img-active{
@@ -100,7 +100,7 @@ main{
           float: left;
         }
       }
-      .villian-corner{
+      .villian-section{
         float: right;
         width: 40%;
         img{

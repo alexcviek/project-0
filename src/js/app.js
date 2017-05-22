@@ -27,7 +27,7 @@ $(() => {
       attack: 1,
       warCry: 2,
       defend: 5,
-      accuracy: 0.7
+      accuracy: 0.3
     },
     three: {
       name: 'Mutant Nick',
@@ -48,8 +48,8 @@ $(() => {
     two: {
       name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
-      attack: 10,
-      accuracy: 0.6
+      attack: 20,
+      accuracy: 0.9
     },
     three: {
       name: 'Medusa',
@@ -65,10 +65,14 @@ $(() => {
   const $backBtn = $('#back');
   const $playBtn = $('#play');
   const $characterScreen = $('.character-screen');
+  const $character = $('.character');
+  const $name = $('.name');
   const $startBtn = $('#start');
   const $chosenCharacter = $('.chosen-character');
   const $gameWindow = $('.game-window');
   const $kickOffBtn = $('#kick-off');
+  const $gameOverScreen = $('.game-over');
+
 
   function hideWindow1(){
     $instructions.removeClass('hidden');
@@ -96,7 +100,7 @@ $(() => {
   function getTheName(){
     playerName = $(this).val();
     if (playerName.length === 0){
-      playerName = playerChosen.name;
+      alert('You must provide your name');
     }
     $('#name').text(`Hello ${playerName}!`);
     $('.player1-name').text(playerName);
@@ -106,7 +110,7 @@ $(() => {
     $(this).addClass('active').siblings().removeClass('active');
     const id = $(this).attr('id');
     if(id){
-      $('#start').attr('disabled', false);
+      $startBtn.attr('disabled', false);
     }
     playerChosen = characters[id];
     villianChosen = villians[id];
@@ -118,12 +122,11 @@ $(() => {
     setInterval(() => {
       $('#player-health').html(playerLife);
       $('#villian-score').html(villianLife);
-      $('h1').text(`Round ${round}`);
     }, 500);
   }
   function displayRound(){
     setInterval(() => {
-      $('h1').text(`Round ${round}`);
+      $('#round-no').text(`Round ${round}`);
     }, 500);
   }
   function displayScore(){
@@ -154,9 +157,9 @@ $(() => {
     if(turn === false){
       if(Math.random() < villianChosen.accuracy){
         playerLife -= villianChosen.attack;
-        roundText = 'Crap! He hit you!';
+        roundText = 'He hit you!';
       } else{
-        roundText = 'Lucky u! This time it is a miss and you are safe!';
+        roundText = 'You are safe!';
       }
       $('#battle-text').text(`${roundText}`);
       checkForWinner();
@@ -204,15 +207,14 @@ $(() => {
   function whoseTurn(){
     if (turn === false){
       console.log('not your turn');
-      $('.player-corner img').removeClass('img-active');
+      $('.player-section img').removeClass('img-active');
     }
     if (turn === true){
       console.log('your turn');
-      $('.player-corner img').addClass('img-active');
+      $('.player-section img').addClass('img-active');
     }
   }
   function nextRound(){
-    console.log('Round 2!');
     round += 1;
     villianLife = 25 * round;
     playerLife = 20  * round;
@@ -222,31 +224,32 @@ $(() => {
   }
   function gameOver(){
     $gameWindow.addClass('hidden');
-    $('.game-over').removeClass('hidden');
+    $gameOverScreen.removeClass('hidden');
   }
   function resetData(){
     roundText = '';
+    $('#battle-text').text(`${roundText}`);
     playerLife = 20;
     villianLife = 20;
     round = 1;
     score = 0;
   }
   function newGame(){
-    $('.game-over').addClass('hidden');
+    $gameOverScreen.addClass('hidden');
     resetData();
     startTheGame();
   }
   function backToMenu(){
-    $('.game-over').addClass('hidden');
-    $('.welcome').removeClass('hidden');
+    $gameOverScreen.addClass('hidden');
+    $welcome.removeClass('hidden');
     resetData();
   }
   $instructionsBtn.on('click', hideWindow1);
   $backBtn.on('click', hideWindow2);
   $playBtn.on('click', goToChoiceScreen);
   $startBtn.on('click', toTheGame);
-  $('.name').on('keyup', getTheName);
-  $('.person').on('click', selectCharacter);
+  $name.on('keyup', getTheName);
+  $character.on('click', selectCharacter);
   $kickOffBtn.on('click', startTheGame);
   $('#attack').on('click', attackVillian);
   $('#warcry').on('click', warCry);
