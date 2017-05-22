@@ -17,6 +17,7 @@ $(() => {
       name: 'Nick',
       image: 'public/assets/images/player1.gif',
       attack: 4,
+      currentAttack: 4,
       warCry: 2,
       defend: 4,
       accuracy: 0.4
@@ -24,15 +25,17 @@ $(() => {
     two: {
       name: 'Ellen',
       image: 'public/assets/images/player2.gif',
-      attack: 1,
-      warCry: 2,
+      attack: 10,
+      currentAttack: 10,
+      warCry: 5,
       defend: 5,
-      accuracy: 0.3
+      accuracy: 0.7
     },
     three: {
       name: 'Mutant Nick',
       image: 'public/assets/images/player3.gif',
       attack: 6,
+      currentAttack: 6,
       warCry: 1,
       defend: 2,
       accuracy: 0.5
@@ -48,8 +51,8 @@ $(() => {
     two: {
       name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
-      attack: 20,
-      accuracy: 0.9
+      attack: 3,
+      accuracy: 0.3
     },
     three: {
       name: 'Medusa',
@@ -138,7 +141,10 @@ $(() => {
   function attackVillian(){
     if(turn === true){
       if(Math.random() < playerChosen.accuracy){
-        villianLife -= playerChosen.attack;
+        console.log(playerChosen.currentAttack);
+        villianLife -= playerChosen.currentAttack;
+        playerChosen.currentAttack = playerChosen.attack;
+        console.log(playerChosen.currentAttack);
         score += 5;
         roundText = 'You have hit him!';
       } else{
@@ -179,17 +185,10 @@ $(() => {
   function warCry(){
     turn = false;
     whoseTurn();
-    console.log(playerChosen.attack);
-    playerChosen.attack += playerChosen.warCry;
-    console.log(playerChosen.attack);
+    playerChosen.currentAttack += playerChosen.warCry;
     setTimeout(() => {
       attackPlayer();
     }, 2000);
-    setTimeout(() => {
-      attackVillian();
-      playerChosen.attack -= playerChosen.warCry;
-      console.log(playerChosen.attack);
-    }, 3000);
   }
   function checkForWinner(){
     if (playerLife <= 0){
