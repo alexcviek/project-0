@@ -8,9 +8,7 @@ $(() => {
   let roundText;
   let round = 1;
   let score = 0;
-  // const $highScore = $('.high-score');
-  // let highScore = localStorage.getItem('highScore') || 0;
-  // $highScore.text(highScore);
+  let highScore = localStorage.getItem('highScore') || 0;
 
   const characters = {
     one: {
@@ -25,11 +23,11 @@ $(() => {
     two: {
       name: 'Ellen',
       image: 'public/assets/images/player2.gif',
-      attack: 10,
-      currentAttack: 10,
+      attack: 5,
+      currentAttack: 5,
       warCry: 5,
       defend: 5,
-      accuracy: 0.6
+      accuracy: 0.4
     },
     three: {
       name: 'Mutant Nick',
@@ -51,7 +49,7 @@ $(() => {
     two: {
       name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
-      attack: 2,
+      attack: 5,
       accuracy: 0.5
     },
     three: {
@@ -80,7 +78,8 @@ $(() => {
   const $defend = $('#defend');
   const $newGame = $('#new-game');
   const $backToMenu = $('#back-to-menu');
-
+  const $score = $('#player-score');
+  const $highScore = $('.high-score');
 
   function hideWindow1(){
     $instructions.removeClass('hidden');
@@ -101,10 +100,15 @@ $(() => {
   function startTheGame(){
     $chosenCharacter.addClass('hidden');
     $gameWindow.removeClass('hidden');
+    $highScore.text(highScore);
     displayHealth();
     displayScore();
     displayRound();
     displayCurrentAttack();
+  }
+  function updateHighScore(){
+    highScore = score > highScore ? score : highScore;
+    $highScore.text(highScore);
   }
   function getTheName(){
     playerName = $(this).val();
@@ -113,13 +117,7 @@ $(() => {
     }
     $('.player-name').text(playerName);
   }
-  // function createCharacters(){
-  //   for (var i = 0; i < characters.length; i++){
-  //     let charElement = document.createElement('img');
-  //     charElement.setAttribute('src', 'i[]');
-  //     $('.choices').appendChild(charElement);
-  //   }
-  // }
+
   function selectCharacter(){
     $(this).addClass('active').siblings().removeClass('active');
     const id = $(this).attr('id');
@@ -135,7 +133,7 @@ $(() => {
   function displayHealth(){
     setInterval(() => {
       $('#player-health').html(playerLife);
-      $('#villian-score').html(villianLife);
+      $('#villian-health').html(villianLife);
     }, 500);
   }
   function displayRound(){
@@ -150,10 +148,10 @@ $(() => {
   }
   function displayScore(){
     setInterval(() => {
-      $('#player-score').html(score);
+      $score.html(score);
     }, 500);
   }
-
+  
   function attackVillian(){
     if(turn === true){
       if(Math.random() < playerChosen.accuracy){
@@ -168,6 +166,7 @@ $(() => {
       turn = false;
       whoseTurn();
       checkForWinner();
+      updateHighScore();
       setTimeout(() => {
         attackPlayer();
       }, 3000);
@@ -211,7 +210,7 @@ $(() => {
       gameOver();
     }
     if(villianLife <= 0){
-      $('#winner').text('You won this round!!! Ta-da!!').css({'color': 'red', 'font-size': '30px'});
+      $('#winner').text('You won this round!!! Ta-da!!').css({'color': '#C5D200', 'font-size': '28px'});
       turn = true;
       setTimeout(() => {
         nextRound();
@@ -235,6 +234,7 @@ $(() => {
     $('#battle-text').text(`${roundText}`);
   }
   function gameOver(){
+    localStorage.setItem('highScore', highScore);
     $gameWindow.addClass('hidden');
     $gameOverScreen.removeClass('hidden');
   }

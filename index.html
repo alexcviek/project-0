@@ -62,15 +62,17 @@
         <div class="player-section">
           <img class="player img-active">
           <p class="player-name"></p>
+              <audio></audio>
           <p>Health:<span id="player-health"></span></p>
-          <p>Current Attack:<span id="current-attack"></span></p>
+          <p>Attack:<span id="current-attack"></span></p>
           <p>Score:<span id="player-score"></span></p>
           <p>Highscore:<span class="high-score"></span></p>
           </div>
           <div class="villian-section">
             <img class="villian">
             <p class="villian-name"></p>
-            <p>Health:<span id="villian-score"></span></p>
+            <p>Health:<span id="villian-health"></span></p>
+            <p>Attack:</p>
           </div>
         </div>
         <div class="battle-display">
@@ -84,7 +86,7 @@
       </div>
       <div class="game-over hidden">
         <h2>Game over!</h2>
-        <p>Highscore is: <span id="highscore"></span></p>
+        <p>Highscore is: <span class="high-score"></span></p>
         <p>Play again?</p>
         <button id="new-game">Yes</button>
         <button id="back-to-menu">No</button>
