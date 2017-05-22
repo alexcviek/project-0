@@ -31,20 +31,30 @@
       <h2>Choose your character</h2>
       <p>Choose one of the below characters and input your name</p>
       <div class="choices">
-        <div id="one" class="character"><img src="public/assets/images/player1.gif" alt="char1"><p>Nick</p></div>
-        <div id="two" class="character"><img src="public/assets/images/player2.gif" alt="char2"><p>Ellen</p></div>
-        <div id="three" class="character"><img src="public/assets/images/player3.gif" alt="char3"><p>Nick2</p></div>
+        <div id="one" class="character"><img src="public/assets/images/player1.gif" alt="char1"><p>Nick</p>
+        <p>Attack</p>
+        <p>WarCry</p>
+        <p>Defend</p>
       </div>
-      <form>
-        <label>Your name</label>
-        <input class="name" type="text">
-      </form>
+        <div id="two" class="character"><img src="public/assets/images/player2.gif" alt="char2"><p>Ellen</p>
+          <p>Attack</p>
+          <p>WarCry</p>
+          <p>Defend</p></div>
+        <div id="three" class="character"><img src="public/assets/images/player3.gif" alt="char3"><p>Nick2</p>
+          <p>Attack</p>
+          <p>WarCry</p>
+          <p>Defend</p>
+        </div>
+      </div>
       <button id="start" disabled>Start the battle</button>
     </div>
     <div class="chosen-character hidden">
       <h2>Let's get ready to rumble!!!</h2>
-      <p id="name"></p>
       <img>
+      <form>
+        <label>Your name</label>
+        <input class="name" type="text">
+      </form>
       <button id="kick-off">Let's kick some ass</button>
     </div>
     <div class="game-window hidden">
@@ -53,9 +63,9 @@
           <img class="player img-active">
           <p class="player-name"></p>
           <p>Health:<span id="player-health"></span></p>
+          <p>Current Attack:<span id="current-attack"></span></p>
           <p>Score:<span id="player-score"></span></p>
           <p>Highscore:<span class="high-score"></span></p>
-          <p>Current Attack:<span class="current-attack"></span></p>
           </div>
           <div class="villian-section">
             <img class="villian">
@@ -76,8 +86,8 @@
         <h2>Game over!</h2>
         <p>Highscore is: <span id="highscore"></span></p>
         <p>Play again?</p>
-        <button id="yes">Yes</button>
-        <button id="no">No</button>
+        <button id="new-game">Yes</button>
+        <button id="back-to-menu">No</button>
       </div>
     </main>
   </body>

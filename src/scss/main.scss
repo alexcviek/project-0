@@ -2,59 +2,61 @@
   box-sizing: border-box;
 }
 body{
-  background-color: #fafafa;
+  background-color: #F5F5F5;
   margin: 0 auto;
 }
 header{
   margin: 0 auto;
-  background-color: #fafafa;
-  height: 150px;
+  background-color: #F5F5F5;
+  height: 100px;
   font-family: 'Orbitron', sans-serif;
   h1{
     margin: 0 auto;
     text-align: center;
-    font-size: 50px;
-    line-height: 150px;
+    font-size: 38px;
+    line-height: 100px;
+    color: #51710A;
   }
 }
 main{
   margin: 0 auto;
   max-width: 900px;
-  height: 600px;
-  border: 2px solid black;
+  height: 500px;
+  border: 2px solid #424242;
   .welcome, .instructions, .character-screen, .chosen-character, .game-window, .game-over{
     margin: 45px auto;
     width: 500px;
-    height: 500px;
+    height: 400px;
     h2, p, button, label{
       text-align: center;
       font-family: 'Jura', sans-serif;
+      color: #424242;
     }
     h2{
-      font-size: 40px;
+      font-size: 30px;
     }
     p{
-      font-size: 20px;
+      font-size: 14px;
     }
     button, label, input{
       margin: 20px auto;
       display: block;
-      font-size: 20px;
+      font-size: 14px;
       padding: 5px 20px;
-      border: 2px solid black;
+      border: 2px solid #204215;
       border-radius: 5px;
     }
     label{
       border: none;
     }
     button:hover{
-      background-color: #fff;
+      background-color: #C5D200;
     }
     .choices{
       width: 400px;
-      height: 200px;
+      height: 250px;
       margin: 0 auto;
-      border: 2px solid black;
+      border: 2px solid #204215;
       .character{
         width: 100px;
         height: 100px;
@@ -65,24 +67,24 @@ main{
         }
       }
       .active{
-        border: 5px solid #000;
+        border: 5px solid #204215;
       }
     }
   }
   .chosen-character{
     img{
-      max-width: 200px;
+      max-width: 150px;
       position: relative;
-      left: 30%;
+      left: 35%;
     }
   }
   .game-window{
     margin: 45px auto;
     width: 800px;
-    height: 500px;
+    height: 460px;
     button{
       display: inline-block;
-      margin-left: 120px;
+      margin: 10px 0 0 130px;
     }
     img{
       max-width: 150px;
@@ -93,14 +95,14 @@ main{
       p{
         line-height: 15px;
         margin-top: 5px;
-        font-size: 17px;
+        font-size: 14px;
       }
       .player-section{
         line-height: 10px;
         float: left;
         width: 40%;
         .img-active{
-          border: 5px solid #204215;
+          border: 10px solid #204215;
         }
         img{
           float: left;
@@ -117,7 +119,7 @@ main{
 
       .winner{
         font-size: 30px;
-        color: red;
+        color: #204215;
 
       }
     }

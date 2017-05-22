@@ -29,7 +29,7 @@ $(() => {
       currentAttack: 10,
       warCry: 5,
       defend: 5,
-      accuracy: 0.7
+      accuracy: 0.6
     },
     three: {
       name: 'Mutant Nick',
@@ -51,8 +51,8 @@ $(() => {
     two: {
       name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
-      attack: 3,
-      accuracy: 0.3
+      attack: 2,
+      accuracy: 0.5
     },
     three: {
       name: 'Medusa',
@@ -75,6 +75,11 @@ $(() => {
   const $gameWindow = $('.game-window');
   const $kickOffBtn = $('#kick-off');
   const $gameOverScreen = $('.game-over');
+  const $attack = $('#attack');
+  const $warCry = $('#warcry');
+  const $defend = $('#defend');
+  const $newGame = $('#new-game');
+  const $backToMenu = $('#back-to-menu');
 
 
   function hideWindow1(){
@@ -99,16 +104,22 @@ $(() => {
     displayHealth();
     displayScore();
     displayRound();
+    displayCurrentAttack();
   }
   function getTheName(){
     playerName = $(this).val();
     if (playerName.length === 0){
       alert('You must provide your name');
     }
-    $('#name').text(`Get ready, ${playerName}!`);
     $('.player-name').text(playerName);
   }
-
+  // function createCharacters(){
+  //   for (var i = 0; i < characters.length; i++){
+  //     let charElement = document.createElement('img');
+  //     charElement.setAttribute('src', 'i[]');
+  //     $('.choices').appendChild(charElement);
+  //   }
+  // }
   function selectCharacter(){
     $(this).addClass('active').siblings().removeClass('active');
     const id = $(this).attr('id');
@@ -132,6 +143,11 @@ $(() => {
       $('#round-no').text(`Round ${round}`);
     }, 500);
   }
+  function displayCurrentAttack(){
+    setInterval(() => {
+      $('#current-attack').text(playerChosen.currentAttack);
+    }, 500);
+  }
   function displayScore(){
     setInterval(() => {
       $('#player-score').html(score);
@@ -141,15 +157,13 @@ $(() => {
   function attackVillian(){
     if(turn === true){
       if(Math.random() < playerChosen.accuracy){
-        console.log(playerChosen.currentAttack);
         villianLife -= playerChosen.currentAttack;
-        playerChosen.currentAttack = playerChosen.attack;
-        console.log(playerChosen.currentAttack);
-        score += 5;
+        score += playerChosen.currentAttack;
         roundText = 'You have hit him!';
       } else{
         roundText = 'Whooops! A miss...';
       }
+      playerChosen.currentAttack = playerChosen.attack;
       $('#battle-text').text(`${roundText}`);
       turn = false;
       whoseTurn();
@@ -174,6 +188,7 @@ $(() => {
     }
   }
   function defend(){
+    $('#battle-text').text('');
     turn = false;
     whoseTurn();
     villianChosen.attack -= playerChosen.defend;
@@ -183,6 +198,7 @@ $(() => {
     }, 2000);
   }
   function warCry(){
+    $('#battle-text').text('');
     turn = false;
     whoseTurn();
     playerChosen.currentAttack += playerChosen.warCry;
@@ -193,7 +209,6 @@ $(() => {
   function checkForWinner(){
     if (playerLife <= 0){
       gameOver();
-      turn = true;
     }
     if(villianLife <= 0){
       $('#winner').text('You won this round!!! Ta-da!!').css({'color': 'red', 'font-size': '30px'});
@@ -205,11 +220,9 @@ $(() => {
   }
   function whoseTurn(){
     if (turn === false){
-      console.log('not your turn');
       $('.player-section img').removeClass('img-active');
     }
     if (turn === true){
-      console.log('your turn');
       $('.player-section img').addClass('img-active');
     }
   }
@@ -232,6 +245,7 @@ $(() => {
     villianLife = 20;
     round = 1;
     score = 0;
+    turn = true;
   }
   function newGame(){
     $gameOverScreen.addClass('hidden');
@@ -250,9 +264,9 @@ $(() => {
   $name.on('keyup', getTheName);
   $character.on('click', selectCharacter);
   $kickOffBtn.on('click', startTheGame);
-  $('#attack').on('click', attackVillian);
-  $('#warcry').on('click', warCry);
-  $('#defend').on('click', defend);
-  $('#yes').on('click', newGame);
-  $('#no').on('click', backToMenu);
+  $attack.on('click', attackVillian);
+  $warCry.on('click', warCry);
+  $defend.on('click', defend);
+  $newGame.on('click', newGame);
+  $backToMenu.on('click', backToMenu);
 });
