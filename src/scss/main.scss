@@ -102,7 +102,7 @@ main{
         float: left;
         width: 40%;
         .img-active{
-          border: 10px solid #C5D200;
+          border: 10px solid #206B15;
         }
         img{
           float: left;
@@ -116,7 +116,6 @@ main{
           float: right;
           margin-right: 20px;
         }
-
       }
     }
   }
@@ -160,9 +159,16 @@ main{
       height: 400px;
       .choices{
         border: none;
+        p{
+          font-size: 10px;
+        }
       }
       h2{
         margin-top: 20px;
+      }
+      button{
+        position: relative;
+        bottom: 60px;
       }
     }
     .chosen-character{
@@ -178,7 +184,7 @@ main{
         margin-left: 80px;
       }
       h2{
-        margin-top: 20px;
+        margin-top: 10px;
       }
       img{
         max-width: 100px;

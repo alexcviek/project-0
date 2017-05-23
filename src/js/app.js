@@ -16,47 +16,53 @@ $(() => {
       image: 'public/assets/images/player1.gif',
       attack: 4,
       currentAttack: 4,
-      warCry: 2,
+      warCry: 3,
       defend: 4,
-      accuracy: 0.9
+      accuracy: 0.6,
+      currentAccuracy: 0.6
     },
     {
       name: 'Ellen',
       image: 'public/assets/images/player2.gif',
-      attack: 1,
-      currentAttack: 1,
-      warCry: 5,
+      attack: 5,
+      currentAttack: 5,
+      warCry: 2,
       defend: 5,
-      accuracy: 0.8
+      accuracy: 0.6,
+      currentAccuracy: 0.6
     },
     {
       name: 'Mutant Nick',
       image: 'public/assets/images/player3.gif',
-      attack: 6,
-      currentAttack: 6,
-      warCry: 1,
+      attack: 4,
+      currentAttack: 4,
+      warCry: 5,
       defend: 2,
-      accuracy: 0.6
+      accuracy: 0.6,
+      currentAccuracy: 0.6
     }
   ];
   const villians = [
     {
       name: 'Henry',
-      image: 'public/assets/images/villian3.jpg',
+      image: 'public/assets/images/villian1.gif',
       attack: 5,
-      accuracy: 0.5
+      accuracy: 0.3,
+      currentAccuracy: 0.3
     },
     {
       name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
-      attack: 20,
-      accuracy: 0.8
+      attack: 5,
+      accuracy: 0.3,
+      currentAccuracy: 0.3
     },
     {
       name: 'Medusa',
       image: 'public/assets/images/villian3.gif',
-      attack: 4,
-      accuracy: 0.56
+      attack: 5,
+      accuracy: 0.3,
+      currentAccuracy: 0.3
     }
   ];
 
@@ -152,6 +158,7 @@ $(() => {
     $('.chosen-character img, .player-img').attr('src', playerChosen.image);
     $('.villian').attr('src', villianChosen.image);
     $('.villian-name').text(villianChosen.name);
+    $('#villian-attack').text(villianChosen.attack);
   }
   function displayHealth(){
     setInterval(() => {
@@ -177,7 +184,7 @@ $(() => {
 
   function attackVillian(){
     if(turn === true){
-      if(Math.random() < playerChosen.accuracy){
+      if(Math.random() < playerChosen.currentAccuracy){
         villianLife -= playerChosen.currentAttack;
         score += playerChosen.currentAttack;
         roundText = 'You have hit him!';
@@ -201,7 +208,7 @@ $(() => {
   }
   function attackPlayer(){
     if(turn === false){
-      if(Math.random() < villianChosen.accuracy){
+      if(Math.random() < villianChosen.currentAccuracy){
         playerLife -= villianChosen.attack;
         roundText = 'He hit you!';
         $punchAudio.play();
@@ -261,12 +268,16 @@ $(() => {
     }
   }
   function nextRound(){
+    playerChosen.currentAccuracy += 0.02;
+    villianChosen.currentAccuracy += 0.05;
     round += 1;
-    villianLife = 25 * round;
-    playerLife = 20  * round;
+    villianLife = 20;
+    playerLife = 20  + round;
     roundText = '';
     $('#winner').text('');
     $('#turn-result').text(`${roundText}`);
+    $('.player-section img').addClass('img-active');
+
   }
   function gameOver(){
     localStorage.setItem('highScore', highScore);
@@ -281,6 +292,8 @@ $(() => {
     round = 1;
     score = 0;
     playerChosen.currentAttack = playerChosen.attack;
+    playerChosen.currentAccuracy = playerChosen.accuracy;
+    villianChosen.currentAccuracy = villianChosen.accuracy;
     turn = true;
     $choices.empty();
     $('.villian-section img').removeClass('animated shake');
