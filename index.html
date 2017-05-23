@@ -14,7 +14,12 @@
     <h1>Battle</h1>
   </header>
   <main>
-    <audio src=""></audio>
+    <audio src="/public/assets/audio/punch.wav"></audio>
+    <audio src="/public/assets/audio/punch.flac"></audio>
+    <audio src="/public/assets/audio/sw1.wav"></audio>
+    <audio src="/public/assets/audio/sw2.wav"></audio>
+    <audio src="/public/assets/audio/dramatic.wav"></audio>
+    <audio src="/public/assets/audio/tada.wav"></audio>
     <div class="welcome">
       <h2>Hello!</h2>
       <p>Choose one of the following:</p>
@@ -47,9 +52,9 @@
       <div class="game-window hidden">
         <div class="players-display">
           <div class="player-section">
-            <img class="player img-active">
+            <img class="player-img img-active">
             <p class="player-name"></p>
-            <p>Health:<span id="player-health"></span></p>
+            <p>Health:<span id="player-life"></span></p>
             <p>Attack:<span id="current-attack"></span></p>
             <p>Score:<span id="player-score"></span></p>
             <p>Highscore:<span class="high-score"></span></p>
@@ -57,7 +62,7 @@
           <div class="villian-section">
             <img class="villian">
             <p class="villian-name"></p>
-            <p>Health:<span id="villian-health"></span></p>
+            <p>Health:<span id="villian-life"></span></p>
             <p>Attack:</p>
           </div>
         </div>
@@ -66,7 +71,7 @@
           <button id="warcry">War Cry</button>
           <button id="defend">Defend</button>
           <h2 id="round-no">Round</h2>
-          <p id="battle-text"></p>
+          <p id="turn-result"></p>
           <p id="winner"></p>
         </div>
       </div>
