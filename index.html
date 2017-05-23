@@ -3,15 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <title>Alex's Battle Game</title>
+  <script src="https://use.fontawesome.com/bcbf3ec7c9.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="public/js/app.js" charset="utf-8"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
-  <link href="https://fonts.googleapis.com/css?family=Jura|Orbitron:400,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Jura:400,600|Orbitron:400,900" rel="stylesheet">
   <link rel="stylesheet" href="public/css/main.css">
 </head>
 <body>
   <header>
-    <h1>Battle</h1>
+    <h1 class="animated fadeInRight">Battle</h1>
   </header>
   <main>
     <audio src="/public/assets/audio/punch.wav"></audio>
@@ -21,26 +22,33 @@
     <audio src="/public/assets/audio/dramatic.wav"></audio>
     <audio src="/public/assets/audio/tada.wav"></audio>
     <div class="welcome">
-      <h2>Hello!</h2>
-      <p>Choose one of the following:</p>
-      <div class="buttons">
-        <button id="play">Play</button>
-        <button id="instructions">Instructions</button>
+      <div class="animated fadeInUp">
+        <h2>Hello!</h2>
+        <p>Choose one of the following:</p>
+        <div class="buttons">
+          <button id="play">Play</button>
+          <button id="instructions">Instructions</button>
+        </div>
       </div>
     </div>
     <div class="instructions hidden">
-      <h2>How to play</h2>
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
-      <button id="back">Back</button>
+      <div class="animated fadeInUp">
+        <h2>How to play</h2>
+        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum</p>
+        <button id="back">Back</button>
+      </div>
     </div>
     <div class="character-screen hidden">
-      <h2>Choose your character</h2>
-      <p>Choose one of the below characters and input your name</p>
-      <div class="choices animated zoomIn">
+      <div class="animated fadeInUp">
+        <h2>Choose your character</h2>
+        <p>Choose one of the below characters and input your name</p>
+        <div class="choices animated zoomIn">
         </div>
         <button id="start" disabled>Start the battle</button>
       </div>
-      <div class="chosen-character hidden">
+    </div>
+    <div class="chosen-character hidden">
+      <div class="animated fadeInUp">
         <h2>Let's get ready to rumble!!!</h2>
         <img>
         <form>
@@ -49,39 +57,40 @@
         </form>
         <button id="kick-off">Let's kick some ass</button>
       </div>
-      <div class="game-window hidden">
-        <div class="players-display">
-          <div class="player-section">
-            <img class="player-img img-active">
-            <p class="player-name"></p>
-            <p>Health:<span id="player-life"></span></p>
-            <p>Attack:<span id="current-attack"></span></p>
-            <p>Score:<span id="player-score"></span></p>
-            <p>Highscore:<span class="high-score"></span></p>
-          </div>
-          <div class="villian-section">
-            <img class="villian">
-            <p class="villian-name"></p>
-            <p>Health:<span id="villian-life"></span></p>
-            <p>Attack:<span id="villian-attack"></span></p>
-          </div>
+    </div>
+    <div class="game-window hidden">
+      <div class="players-display">
+        <div class="player-section">
+          <img class="player-img img-active">
+          <p class="player-name"></p>
+          <p><i class="fa fa-heart-o" aria-hidden="true"></i> <span id="player-life"></span></p>
+          <p>Attack:<span id="current-attack"></span></p>
+          <p>Score:<span id="player-score"></span></p>
+          <p>Highscore:<span class="high-score"></span></p>
         </div>
-        <div class="battle-display">
-          <button id="attack">Attack</button>
-          <button id="warcry">War Cry</button>
-          <button id="defend">Defend</button>
-          <h2 id="round-no">Round</h2>
-          <p id="turn-result"></p>
-          <p id="winner"></p>
+        <div class="villian-section">
+          <img class="villian">
+          <p class="villian-name"></p>
+          <p><i class="fa fa-heart-o" aria-hidden="true"></i> <span id="villian-life"></span></p>
+          <p>Attack:<span id="villian-attack"></span></p>
         </div>
       </div>
-      <div class="game-over hidden">
-        <h2>Game over!</h2>
-        <p>Highscore is: <span class="high-score"></span></p>
-        <p>Play again?</p>
-        <button id="new-game">Yes</button>
-        <button id="back-to-menu">No</button>
+      <div class="battle-display">
+        <button id="attack"><i class="fa fa-bolt" aria-hidden="true"></i>  Attack</button>
+        <button id="warcry"><i class="fa fa-bullseye" aria-hidden="true"></i> War Cry</button>
+        <button id="defend"><i class="fa fa-shield" aria-hidden="true"></i> Defend</button>
+        <h2 id="round-no">Round</h2>
+        <p id="turn-result"></p>
+        <p id="winner"></p>
       </div>
-    </main>
-  </body>
-  </html>
+    </div>
+    <div class="game-over hidden">
+      <h2>Game over!</h2>
+      <p>Highscore is: <span class="high-score"></span></p>
+      <p>Play again?</p>
+      <button id="new-game">Yes</button>
+      <button id="back-to-menu">No</button>
+    </div>
+  </main>
+</body>
+</html>

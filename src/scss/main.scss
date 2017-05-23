@@ -23,6 +23,7 @@ main{
   max-width: 700px;
   height: 500px;
   border: 2px solid #424242;
+  border-radius: 7px;
   .welcome, .instructions, .character-screen, .chosen-character, .game-window, .game-over{
     margin: 45px auto;
     width: 500px;
@@ -43,7 +44,7 @@ main{
       display: block;
       font-size: 14px;
       padding: 5px 20px;
-      border: 2px solid #204215;
+      border: 5px double #204215;
       border-radius: 5px;
     }
     label{
@@ -57,6 +58,7 @@ main{
       height: 270px;
       margin: 0 auto;
       border: 2px solid #204215;
+      border-radius: 5px;
       .character{
         width: 100px;
         height: 100px;
@@ -65,14 +67,21 @@ main{
         img{
           max-width: 90px;
         }
+        .underlined{
+          text-decoration: underline;
+          font-weight: 600;
+        }
       }
       .active{
-        border: 5px solid #204215;
+        border: 5px double #204215;
+        border-radius: 5px;
       }
     }
   }
   .chosen-character{
     img{
+      border: 2px solid #204215;
+      border-radius: 5px;
       max-width: 150px;
       position: relative;
       left: 35%;
@@ -84,10 +93,11 @@ main{
     height: 460px;
     button{
       display: inline-block;
-      margin: 10px 0 0 107px;
+      margin: 10px 0 0 95px;
     }
     img{
       max-width: 150px;
+      border-radius: 5%;
     }
     .players-display{
       height: 180px;
@@ -102,7 +112,7 @@ main{
         float: left;
         width: 40%;
         .img-active{
-          border: 10px solid #206B15;
+          border: 10px double #206B15;
         }
         img{
           float: left;
@@ -181,7 +191,7 @@ main{
     .game-window{
       button{
         display: inline-block;
-        margin-left: 80px;
+        margin-left: 65px;
       }
       h2{
         margin-top: 10px;

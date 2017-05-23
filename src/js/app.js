@@ -12,7 +12,7 @@ $(() => {
 
   const characters = [
     {
-      name: 'Nick',
+      name: 'Nick the Cat',
       image: 'public/assets/images/player1.gif',
       attack: 4,
       currentAttack: 4,
@@ -22,7 +22,7 @@ $(() => {
       currentAccuracy: 0.6
     },
     {
-      name: 'Ellen',
+      name: 'Ellen Ripley',
       image: 'public/assets/images/player2.gif',
       attack: 5,
       currentAttack: 5,
@@ -32,7 +32,7 @@ $(() => {
       currentAccuracy: 0.6
     },
     {
-      name: 'Mutant Nick',
+      name: 'Catzilla',
       image: 'public/assets/images/player3.gif',
       attack: 4,
       currentAttack: 4,
@@ -44,21 +44,21 @@ $(() => {
   ];
   const villians = [
     {
-      name: 'Henry',
+      name: 'Henry the Hoover',
       image: 'public/assets/images/villian1.gif',
       attack: 5,
       accuracy: 0.3,
       currentAccuracy: 0.3
     },
     {
-      name: 'Xenomorph',
+      name: 'Xenomorph XX121',
       image: 'public/assets/images/villian2.gif',
       attack: 5,
       accuracy: 0.3,
       currentAccuracy: 0.3
     },
     {
-      name: 'Medusa',
+      name: 'Pink Medusa',
       image: 'public/assets/images/villian3.gif',
       attack: 5,
       accuracy: 0.3,
@@ -107,7 +107,7 @@ $(() => {
       const content = `
       <div class="character" data-id=${i}>
       <img src="${characters[i].image}">
-      <p>${characters[i].name}</p>
+      <p class="underlined">${characters[i].name}</p>
       <p>Attack: ${characters[i].attack}</p>
       <p>WarCry: ${characters[i].warCry}</p>
       <p>Defend: ${characters[i].defend}</p>
