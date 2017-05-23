@@ -2,11 +2,11 @@
 <html>
 <head>
   <meta charset="UTF-8">
-  <title>Project 0</title>
+  <title>Alex's Battle Game</title>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
   <script src="public/js/app.js" charset="utf-8"></script>
-  <link href="https://fonts.googleapis.com/css?family=Orbitron:400,900" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Jura" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Jura|Orbitron:400,900" rel="stylesheet">
   <link rel="stylesheet" href="public/css/main.css">
 </head>
 <body>
@@ -14,6 +14,7 @@
     <h1>Battle</h1>
   </header>
   <main>
+    <audio id="audio"></audio>
     <div class="welcome">
       <h2>Hello!</h2>
       <p>Choose one of the following:</p>
@@ -30,7 +31,7 @@
     <div class="character-screen hidden">
       <h2>Choose your character</h2>
       <p>Choose one of the below characters and input your name</p>
-      <div class="choices">
+      <div class="choices animated zoomIn">
         <div id="one" class="character"><img src="public/assets/images/player1.gif" alt="char1"><p>Nick</p>
         <p>Attack</p>
         <p>WarCry</p>
@@ -62,7 +63,6 @@
         <div class="player-section">
           <img class="player img-active">
           <p class="player-name"></p>
-              <audio></audio>
           <p>Health:<span id="player-health"></span></p>
           <p>Attack:<span id="current-attack"></span></p>
           <p>Score:<span id="player-score"></span></p>

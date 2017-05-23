@@ -23,8 +23,8 @@ $(() => {
     two: {
       name: 'Ellen',
       image: 'public/assets/images/player2.gif',
-      attack: 10,
-      currentAttack: 10,
+      attack: 1,
+      currentAttack: 1,
       warCry: 5,
       defend: 5,
       accuracy: 0.8
@@ -49,8 +49,8 @@ $(() => {
     two: {
       name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
-      attack: 5,
-      accuracy: 0.5
+      attack: 20,
+      accuracy: 0.8
     },
     three: {
       name: 'Medusa',
@@ -80,27 +80,27 @@ $(() => {
   const $backToMenu = $('#back-to-menu');
   const $score = $('#player-score');
   const $highScore = $('.high-score');
-  const $audio = $('audio');
+  const $audio = $('#audio');
 
   function hideWindow1(){
-    $instructions.removeClass('hidden');
+    $instructions.removeClass('hidden').addClass('animated fadeIn');
     $welcome.addClass('hidden');
   }
   function hideWindow2(){
-    $instructions.addClass('hidden');
-    $welcome.removeClass('hidden');
+    $instructions.addClass('hidden').removeClass('animated fadeIn');
+    $welcome.removeClass('hidden').addClass('animated fadeIn');
   }
   function goToChoiceScreen(){
     $welcome.addClass('hidden');
-    $characterScreen.removeClass('hidden');
+    $characterScreen.removeClass('hidden').addClass('animated fadeIn');
   }
   function toTheGame(){
     $characterScreen.addClass('hidden');
-    $chosenCharacter.removeClass('hidden');
+    $chosenCharacter.removeClass('hidden').addClass('animated fadeIn');
   }
   function startTheGame(){
     $chosenCharacter.addClass('hidden');
-    $gameWindow.removeClass('hidden');
+    $gameWindow.removeClass('hidden').addClass('animated fadeIn');
     $highScore.text(highScore);
     displayHealth();
     displayScore();
@@ -159,7 +159,7 @@ $(() => {
         villianLife -= playerChosen.currentAttack;
         score += playerChosen.currentAttack;
         roundText = 'You have hit him!';
-        $audio.attr('src','public/assets/audio/punch.wav');
+        $audio.attr('src','/public/assets/audio/punch.wav');
         console.log($audio);
       } else{
         roundText = 'Whooops! A miss...';
@@ -239,7 +239,7 @@ $(() => {
   function gameOver(){
     localStorage.setItem('highScore', highScore);
     $gameWindow.addClass('hidden');
-    $gameOverScreen.removeClass('hidden');
+    $gameOverScreen.removeClass('hidden').addClass('animated fadeIn');
   }
   function resetData(){
     roundText = '';
@@ -258,7 +258,7 @@ $(() => {
   }
   function backToMenu(){
     $gameOverScreen.addClass('hidden');
-    $welcome.removeClass('hidden');
+    $welcome.removeClass('hidden').addClass('animated fadeIn');
     resetData();
   }
   $instructionsBtn.on('click', hideWindow1);
