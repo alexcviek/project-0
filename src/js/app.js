@@ -10,8 +10,8 @@ $(() => {
   let score = 0;
   let highScore = localStorage.getItem('highScore') || 0;
 
-  const characters = {
-    one: {
+  const characters = [
+    {
       name: 'Nick',
       image: 'public/assets/images/player1.gif',
       attack: 4,
@@ -20,7 +20,7 @@ $(() => {
       defend: 4,
       accuracy: 0.4
     },
-    two: {
+    {
       name: 'Ellen',
       image: 'public/assets/images/player2.gif',
       attack: 1,
@@ -29,7 +29,7 @@ $(() => {
       defend: 5,
       accuracy: 0.8
     },
-    three: {
+    {
       name: 'Mutant Nick',
       image: 'public/assets/images/player3.gif',
       attack: 6,
@@ -38,27 +38,27 @@ $(() => {
       defend: 2,
       accuracy: 0.5
     }
-  };
-  const villians = {
-    one: {
+  ];
+  const villians = [
+    {
       name: 'Henry',
       image: 'public/assets/images/villian3.jpg',
       attack: 5,
       accuracy: 0.5
     },
-    two: {
+    {
       name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
       attack: 20,
       accuracy: 0.8
     },
-    three: {
+    {
       name: 'Medusa',
       image: 'public/assets/images/villian3.gif',
       attack: 4,
       accuracy: 0.56
     }
-  };
+  ];
 
   const $instructions = $('.instructions');
   const $instructionsBtn = $('#instructions');
@@ -66,7 +66,7 @@ $(() => {
   const $backBtn = $('#back');
   const $playBtn = $('#play');
   const $characterScreen = $('.character-screen');
-  const $character = $('.character');
+  const $choices = $('.choices');
   const $name = $('.name');
   const $startBtn = $('#start');
   const $chosenCharacter = $('.chosen-character');
@@ -80,7 +80,7 @@ $(() => {
   const $backToMenu = $('#back-to-menu');
   const $score = $('#player-score');
   const $highScore = $('.high-score');
-  const $audio = $('#audio');
+  const $audio = $('audio');
 
   function hideWindow1(){
     $instructions.removeClass('hidden').addClass('animated fadeIn');
@@ -90,9 +90,24 @@ $(() => {
     $instructions.addClass('hidden').removeClass('animated fadeIn');
     $welcome.removeClass('hidden').addClass('animated fadeIn');
   }
+  function createChoices(){
+    for(let i = 0; i < characters.length; i++){
+      const content = `
+      <div class="character" data-id=${i}>
+      <img src="${characters[i].image}">
+      <p>${characters[i].name}</p>
+      <p>Attack: ${characters[i].attack}</p>
+      <p>WarCry: ${characters[i].warCry}</p>
+      <p>Defend: ${characters[i].defend}</p>
+      </div>
+      `;
+      $choices.append(content);
+    }
+  }
   function goToChoiceScreen(){
     $welcome.addClass('hidden');
     $characterScreen.removeClass('hidden').addClass('animated fadeIn');
+    createChoices();
   }
   function toTheGame(){
     $characterScreen.addClass('hidden');
@@ -121,7 +136,7 @@ $(() => {
 
   function selectCharacter(){
     $(this).addClass('active').siblings().removeClass('active');
-    const id = $(this).attr('id');
+    const id = $(this).attr('data-id');
     if(id){
       $startBtn.attr('disabled', false);
     }
@@ -159,13 +174,15 @@ $(() => {
         villianLife -= playerChosen.currentAttack;
         score += playerChosen.currentAttack;
         roundText = 'You have hit him!';
-        $audio.attr('src','/public/assets/audio/punch.wav');
+        $('.villian-section img').addClass('animated shake');
+        $audio.attr('src','./public/assets/audio/punch.wav');
         console.log($audio);
       } else{
         roundText = 'Whooops! A miss...';
       }
       playerChosen.currentAttack = playerChosen.attack;
       $('#battle-text').text(`${roundText}`);
+      $('.player-section img').removeClass('animated shake');
       turn = false;
       whoseTurn();
       checkForWinner();
@@ -180,13 +197,17 @@ $(() => {
       if(Math.random() < villianChosen.accuracy){
         playerLife -= villianChosen.attack;
         roundText = 'He hit you!';
+        $('.player-section img').addClass('animated shake');
       } else{
         roundText = 'You are safe!';
       }
+      $('.villian-section img').removeClass('animated shake');
       $('#battle-text').text(`${roundText}`);
       checkForWinner();
       turn = true;
-      whoseTurn();
+      setTimeout(() => {
+        whoseTurn();
+      },1000);
     }
   }
   function defend(){
@@ -250,6 +271,8 @@ $(() => {
     score = 0;
     playerChosen.currentAttack = playerChosen.attack;
     turn = true;
+    $choices.empty();
+
   }
   function newGame(){
     $gameOverScreen.addClass('hidden');
@@ -266,7 +289,7 @@ $(() => {
   $playBtn.on('click', goToChoiceScreen);
   $startBtn.on('click', toTheGame);
   $name.on('keyup', getTheName);
-  $character.on('click', selectCharacter);
+  $choices.on('click', '.character', selectCharacter);
   $kickOffBtn.on('click', startTheGame);
   $attack.on('click', attackVillian);
   $warCry.on('click', warCry);
