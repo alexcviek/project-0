@@ -163,7 +163,7 @@ $(() => {
     $(this).addClass('active').siblings().removeClass('active');
     const id = $(this).attr('data-id');
     if(id){
-      $startBtn.attr('disabled', false);
+      $startBtn.attr('disabled', false).addClass('animated infinite pulse');
     }
     playerChosen = characters[id];
     villianChosen = villians[id];
@@ -185,6 +185,9 @@ $(() => {
   function displayScore(){
     $score.html(score);
   }
+  function turnResultText(){
+    $turnResult.text(`${roundText}`);
+  }
 
   function attackVillian(){
     if(turn === true){
@@ -199,7 +202,7 @@ $(() => {
         roundText = 'Whooops! A miss...';
       }
       playerChosen.currentAttack = playerChosen.attack;
-      $turnResult.text(`${roundText}`);
+      turnResultText();
       $playerImg.removeClass('animated shake');
       turn = false;
       whoseTurn();
@@ -222,7 +225,7 @@ $(() => {
         roundText = 'You are safe!';
       }
       $villianImg.removeClass('animated shake');
-      $turnResult.text(`${roundText}`);
+      turnResultText();
       checkForWinner();
       turn = true;
       setTimeout(() => {
@@ -275,22 +278,23 @@ $(() => {
     playerChosen.currentAccuracy += 0.02;
     villianChosen.currentAccuracy += 0.05;
     round += 1;
-    villianLife = 20;
+    villianLife = 20 + round;
     playerLife = 20  + round;
     roundText = '';
     $roundMessage.text('');
-    $turnResult.text(`${roundText}`);
-    $playerImg.addClass('img-active');
+    turnResultText();
+    whoseTurn();
 
   }
   function gameOver(){
     localStorage.setItem('highScore', highScore);
     $gameWindow.addClass('hidden');
     $gameOverScreen.removeClass('hidden').addClass('animated fadeIn');
+    resetData();
   }
   function resetData(){
     roundText = '';
-    $turnResult.text(`${roundText}`);
+    turnResultText();
     playerLife = 20;
     villianLife = 20;
     round = 1;
@@ -305,13 +309,11 @@ $(() => {
   }
   function newGame(){
     $gameOverScreen.addClass('hidden');
-    resetData();
     startTheGame();
   }
   function backToMenu(){
     $gameOverScreen.addClass('hidden');
     $welcome.removeClass('hidden').addClass('animated fadeIn');
-    resetData();
   }
   $instructionsBtn.on('click', hideWindow1);
   $backBtn.on('click', hideWindow2);
