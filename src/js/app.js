@@ -18,8 +18,8 @@ $(() => {
       currentAttack: 4,
       warCry: 3,
       defend: 4,
-      accuracy: 0.6,
-      currentAccuracy: 0.6
+      accuracy: 0.5,
+      currentAccuracy: 0.5
     },
     {
       name: 'Ellen Ripley',
@@ -28,8 +28,8 @@ $(() => {
       currentAttack: 5,
       warCry: 2,
       defend: 5,
-      accuracy: 0.6,
-      currentAccuracy: 0.6
+      accuracy: 0.5,
+      currentAccuracy: 0.5
     },
     {
       name: 'Catzilla',
@@ -38,8 +38,8 @@ $(() => {
       currentAttack: 4,
       warCry: 5,
       defend: 2,
-      accuracy: 0.6,
-      currentAccuracy: 0.6
+      accuracy: 0.5,
+      currentAccuracy: 0.5
     }
   ];
   const villians = [
@@ -153,8 +153,8 @@ $(() => {
   }
   function getTheName(){
     playerName = $(this).val();
-    if (playerName.length === 0){
-      alert('You must provide your name');
+    if (playerName.length !== 0){
+      $kickOffBtn.attr('disabled', false).addClass('animated infinite pulse');
     }
     $playerName.text(playerName);
   }
@@ -190,6 +190,7 @@ $(() => {
   }
 
   function attackVillian(){
+    console.log(playerChosen.currentAccuracy);
     if(turn === true){
       if(Math.random() < playerChosen.currentAccuracy){
         villianLife -= playerChosen.currentAttack;
@@ -214,6 +215,7 @@ $(() => {
     }
   }
   function attackPlayer(){
+    console.log(villianChosen.currentAccuracy);
     if(turn === false){
       if(Math.random() < villianChosen.currentAccuracy){
         playerLife -= villianChosen.attack;
@@ -258,6 +260,7 @@ $(() => {
       gameOver();
     }
     if(villianLife <= 0){
+      villianLife = 0;
       $roundMessage.text('You won this round!!! Ta-da!!').css({'color': '#C5D200', 'font-size': '28px'});
       $levelUpAudio.play();
       turn = true;
@@ -275,10 +278,10 @@ $(() => {
     }
   }
   function nextRound(){
-    playerChosen.currentAccuracy += 0.02;
+    playerChosen.currentAccuracy += 0.01;
     villianChosen.currentAccuracy += 0.05;
     round += 1;
-    villianLife = 20 + round;
+    villianLife = 20;
     playerLife = 20  + round;
     roundText = '';
     $roundMessage.text('');
@@ -304,8 +307,8 @@ $(() => {
     villianChosen.currentAccuracy = villianChosen.accuracy;
     turn = true;
     $choices.empty();
-    $villianImg.removeClass('animated shake');
-    $playerImg.removeClass('animated shake');
+    ($villianImg, $playerImg).removeClass('animated shake');
+    ($kickOffBtn, $startBtn).removeClass('animated infinite pulse');
   }
   function newGame(){
     $gameOverScreen.addClass('hidden');

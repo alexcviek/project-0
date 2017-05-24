@@ -6,8 +6,6 @@ body{
   margin: 0 auto;
 }
 header{
-  margin: 0 auto;
-  background-color: #F5F5F5;
   height: 100px;
   font-family: 'Orbitron', sans-serif;
   h1{
@@ -76,6 +74,14 @@ main{
         border: 5px double #204215;
         border-radius: 5px;
       }
+    }
+  }
+  .instructions{
+    h2{
+      font-size: 36px;
+    }
+    p{
+      font-size: 18px;
     }
   }
   .chosen-character{
