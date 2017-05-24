@@ -93,6 +93,16 @@ $(() => {
   const $gameOverAudio = $('audio')[4];
   const $levelUpAudio = $('audio')[5];
   const $playerName = $('.player-name');
+  const $playerImg = $('.player-img');
+  const $playerLife = $('#player-life');
+  const $playerCurrentAttack = $('#player-current-attack');
+  const $villianImg = $('.villian-img');
+  const $villianName = $('.villian-name');
+  const $villianLife = $('#villian-life');
+  const $villianAttack = $('#villian-attack');
+  const $turnResult = $('#turn-result');
+  const $roundNumber = $('#round-no');
+  const $roundMessage = $('#round-message');
 
   function hideWindow1(){
     $instructions.removeClass('hidden').addClass('animated fadeIn');
@@ -130,10 +140,12 @@ $(() => {
     $chosenCharacter.addClass('hidden');
     $gameWindow.removeClass('hidden').addClass('animated fadeIn');
     $highScore.text(highScore);
-    displayHealth();
-    displayScore();
-    displayRound();
-    displayCurrentAttack();
+    setInterval(() => {
+      displayHealth();
+      displayScore();
+      displayRound();
+      displayCurrentAttack();
+    }, 500);
   }
   function updateHighScore(){
     highScore = score > highScore ? score : highScore;
@@ -156,30 +168,22 @@ $(() => {
     playerChosen = characters[id];
     villianChosen = villians[id];
     $('.chosen-character img, .player-img').attr('src', playerChosen.image);
-    $('.villian').attr('src', villianChosen.image);
-    $('.villian-name').text(villianChosen.name);
-    $('#villian-attack').text(villianChosen.attack);
+    $villianImg.attr('src', villianChosen.image);
+    $villianName.text(villianChosen.name);
+    $villianAttack.text(villianChosen.attack);
   }
   function displayHealth(){
-    setInterval(() => {
-      $('#player-life').html(playerLife);
-      $('#villian-life').html(villianLife);
-    }, 500);
+    $playerLife.html(playerLife);
+    $villianLife.html(villianLife);
   }
   function displayRound(){
-    setInterval(() => {
-      $('#round-no').text(`Round ${round}`);
-    }, 500);
+    $roundNumber.text(`Round ${round}`);
   }
   function displayCurrentAttack(){
-    setInterval(() => {
-      $('#current-attack').text(playerChosen.currentAttack);
-    }, 500);
+    $playerCurrentAttack.text(playerChosen.currentAttack);
   }
   function displayScore(){
-    setInterval(() => {
-      $score.html(score);
-    }, 500);
+    $score.html(score);
   }
 
   function attackVillian(){
@@ -188,15 +192,15 @@ $(() => {
         villianLife -= playerChosen.currentAttack;
         score += playerChosen.currentAttack;
         roundText = 'You have hit him!';
-        $('.villian-section img').addClass('animated shake');
+        $villianImg.addClass('animated shake');
         $slapAudio.play();
       } else{
         $swooshAudio.play();
         roundText = 'Whooops! A miss...';
       }
       playerChosen.currentAttack = playerChosen.attack;
-      $('#turn-result').text(`${roundText}`);
-      $('.player-section img').removeClass('animated shake');
+      $turnResult.text(`${roundText}`);
+      $playerImg.removeClass('animated shake');
       turn = false;
       whoseTurn();
       checkForWinner();
@@ -212,13 +216,13 @@ $(() => {
         playerLife -= villianChosen.attack;
         roundText = 'He hit you!';
         $punchAudio.play();
-        $('.player-section img').addClass('animated shake');
+        $playerImg.addClass('animated shake');
       } else{
         $swooshAudio2.play();
         roundText = 'You are safe!';
       }
-      $('.villian-section img').removeClass('animated shake');
-      $('#turn-result').text(`${roundText}`);
+      $villianImg.removeClass('animated shake');
+      $turnResult.text(`${roundText}`);
       checkForWinner();
       turn = true;
       setTimeout(() => {
@@ -227,7 +231,7 @@ $(() => {
     }
   }
   function defend(){
-    $('#turn-result').text('');
+    $turnResult.text('DEFEND!!!');
     turn = false;
     whoseTurn();
     villianChosen.attack -= playerChosen.defend;
@@ -237,7 +241,7 @@ $(() => {
     }, 2000);
   }
   function warCry(){
-    $('#turn-result').text('');
+    $turnResult.text('AAAAAAAAAAAAAAAAAAAaaaaaaa!!!!');
     turn = false;
     whoseTurn();
     playerChosen.currentAttack += playerChosen.warCry;
@@ -251,7 +255,7 @@ $(() => {
       gameOver();
     }
     if(villianLife <= 0){
-      $('#winner').text('You won this round!!! Ta-da!!').css({'color': '#C5D200', 'font-size': '28px'});
+      $roundMessage.text('You won this round!!! Ta-da!!').css({'color': '#C5D200', 'font-size': '28px'});
       $levelUpAudio.play();
       turn = true;
       setTimeout(() => {
@@ -261,10 +265,10 @@ $(() => {
   }
   function whoseTurn(){
     if (turn === false){
-      $('.player-section img').removeClass('img-active');
+      $playerImg.removeClass('img-active');
     }
     if (turn === true){
-      $('.player-section img').addClass('img-active');
+      $playerImg.addClass('img-active');
     }
   }
   function nextRound(){
@@ -274,9 +278,9 @@ $(() => {
     villianLife = 20;
     playerLife = 20  + round;
     roundText = '';
-    $('#winner').text('');
-    $('#turn-result').text(`${roundText}`);
-    $('.player-section img').addClass('img-active');
+    $roundMessage.text('');
+    $turnResult.text(`${roundText}`);
+    $playerImg.addClass('img-active');
 
   }
   function gameOver(){
@@ -286,7 +290,7 @@ $(() => {
   }
   function resetData(){
     roundText = '';
-    $('#turn-result').text(`${roundText}`);
+    $turnResult.text(`${roundText}`);
     playerLife = 20;
     villianLife = 20;
     round = 1;
@@ -296,8 +300,8 @@ $(() => {
     villianChosen.currentAccuracy = villianChosen.accuracy;
     turn = true;
     $choices.empty();
-    $('.villian-section img').removeClass('animated shake');
-    $('.player-section img').removeClass('animated shake');
+    $villianImg.removeClass('animated shake');
+    $playerImg.removeClass('animated shake');
   }
   function newGame(){
     $gameOverScreen.addClass('hidden');
