@@ -92,6 +92,9 @@ $(() => {
   const $swooshAudio2 = $('audio')[3];
   const $gameOverAudio = $('audio')[4];
   const $levelUpAudio = $('audio')[5];
+  const $meow = $('audio')[6];
+  const $roar = $('audio')[7];
+  const $getAway = $('audio')[8];
   const $playerName = $('.player-name');
   const $playerImg = $('.player-img');
   const $playerLife = $('#player-life');
@@ -246,6 +249,13 @@ $(() => {
     }, 2000);
   }
   function warCry(){
+    if (playerChosen.name === 'Nick the Cat'){
+      $meow.play();
+    } else if (playerChosen.name === 'Catzilla'){
+      $roar.play();
+    } else if (playerChosen.name === 'Ellen Ripley'){
+      $getAway.play();
+    }
     $turnResult.text('AAAAAAAAAAAAAAAAAAAaaaaaaa!!!!');
     turn = false;
     whoseTurn();
