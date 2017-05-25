@@ -11,7 +11,7 @@
 	*	Git & github
 
 ## Challenges faced:
-	*	How to coordinate the choices board with the array of characters - it was too painful to change everything in JS and then in HTML file too. => Created the choice board in JS, so the characters are directly taken from there. No need check if values are corresponding!
+* How to coordinate the choices board with the array of characters - it was too painful to change everything in JS and then in HTML file too. => Created the choice board in JS, so the characters are directly taken from there. No need check if values are corresponding!
 
 ## Improvements:
 	*	Improve overall styling
