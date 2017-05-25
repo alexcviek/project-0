@@ -14,12 +14,12 @@ $(() => {
     {
       name: 'Nick the Cat',
       image: 'public/assets/images/player1.gif',
-      attack: 20,
-      currentAttack: 20,
+      attack: 4,
+      currentAttack: 4,
       warCry: 3,
       defend: 4,
       accuracy: 0.9,
-      currentAccuracy: 0.9
+      currentAccuracy: 0.5
     },
     {
       name: 'Ellen Ripley',
