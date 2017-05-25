@@ -10,6 +10,7 @@ game.roundText;
 game.round = 1;
 game.score = 0;
 game.highScore = localStorage.getItem('highScore') || 0;
+
 game.characters = [
   {
     name: 'Nick the Cat',
@@ -218,6 +219,7 @@ game.attackPlayer = function attackPlayer(){
 
 game.defend = function defend(){
   this.$turnResult.text('DEFEND!!!');
+  this.$playerImg.removeClass('animated shake');
   this.turn = false;
   this.whoseTurn();
   this.villianChosen.attack -= this.playerChosen.defend;
@@ -235,6 +237,7 @@ game.warCry = function warCry(){
   } else if (this.playerChosen.name === 'Ellen Ripley'){
     this.$getAway.play();
   }
+  this.$playerImg.removeClass('animated shake');
   this.$turnResult.text('You have used WarCry');
   this.turn = false;
   this.whoseTurn();
