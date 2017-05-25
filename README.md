@@ -2,8 +2,8 @@
 🎮 A game made as part of WDI27 in London
 
 ## Technologies used:
-	*	HTML 5
-	*	CSS animations
+*HTML 5
+*CSS animations
 	*	SCSS
 	*	jQuery 3.10
 	*	Gulp
