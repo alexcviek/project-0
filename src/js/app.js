@@ -14,12 +14,12 @@ $(() => {
     {
       name: 'Nick the Cat',
       image: 'public/assets/images/player1.gif',
-      attack: 4,
-      currentAttack: 4,
+      attack: 20,
+      currentAttack: 20,
       warCry: 3,
       defend: 4,
-      accuracy: 0.5,
-      currentAccuracy: 0.5
+      accuracy: 0.9,
+      currentAccuracy: 0.9
     },
     {
       name: 'Ellen Ripley',
@@ -99,6 +99,8 @@ $(() => {
   const $playerImg = $('.player-img');
   const $playerLife = $('#player-life');
   const $playerCurrentAttack = $('#player-current-attack');
+  const $playerCurrAccuracy = $('#player-current-accuracy');
+  const $villianCurrAccuracy = $('#villian-current-accuracy');
   const $villianImg = $('.villian-img');
   const $villianName = $('.villian-name');
   const $villianLife = $('#villian-life');
@@ -148,6 +150,7 @@ $(() => {
       displayScore();
       displayRound();
       displayCurrentAttack();
+      displayAccuracy();
     }, 500);
   }
   function updateHighScore(){
@@ -180,8 +183,13 @@ $(() => {
     $playerLife.html(playerLife);
     $villianLife.html(villianLife);
   }
+
+  function displayAccuracy(){
+    $playerCurrAccuracy.html(playerChosen.currentAccuracy.toFixed(2));
+    $villianCurrAccuracy.html(villianChosen.currentAccuracy.toFixed(2));
+  }
   function displayRound(){
-    $roundNumber.text(`Round ${round}`);
+    $roundNumber.text(`${round}`);
   }
   function displayCurrentAttack(){
     $playerCurrentAttack.text(playerChosen.currentAttack);
@@ -272,7 +280,7 @@ $(() => {
     }
     if(villianLife <= 0){
       villianLife = 0;
-      $roundMessage.text('You won this round!!! Ta-da!!').css({'color': '#C5D200', 'font-size': '28px'});
+      $roundMessage.text('You won this round!!! Ta-da!!').css({'color': '#204215', 'font-size': '28px'});
       $levelUpAudio.play();
       turn = true;
       setTimeout(() => {

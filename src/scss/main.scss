@@ -26,7 +26,7 @@ main{
     margin: 45px auto;
     width: 500px;
     height: 400px;
-    h2, p, button, label{
+    h2, p, button, label, ul, li{
       text-align: center;
       font-family: 'Jura', sans-serif;
       color: #424242;
@@ -163,7 +163,7 @@ main{
     height: 460px;
     button{
       display: inline-block;
-      margin: 10px 0 0 95px;
+      margin: 10px 0 20px 95px;
     }
     img{
       max-width: 150px;
@@ -196,6 +196,13 @@ main{
           float: right;
           margin-right: 20px;
         }
+      }
+    }
+    ul{
+      margin-top: 30px;
+      li{
+        display: inline;
+        padding: 60px;
       }
     }
   }
@@ -288,6 +295,13 @@ main{
           margin-top: 10px;
           line-height: 12px;
           font-size: 10px;
+        }
+      }
+      ul{
+        margin-top: -10px;
+        li{
+          display: inline;
+          padding: 30px;
         }
       }
     }

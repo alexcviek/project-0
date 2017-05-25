@@ -75,21 +75,25 @@
           <p class="player-name"></p>
           <p><i class="fa fa-heart-o" aria-hidden="true"></i> <span id="player-life"></span></p>
           <p>Attack:<span id="player-current-attack"></span></p>
-          <p>Score:<span id="player-score"></span></p>
-          <p>Highscore:<span class="high-score"></span></p>
+          <p>Accuracy:<span id="player-current-accuracy"></span></p>
         </div>
         <div class="villian-section">
           <img class="villian-img">
           <p class="villian-name"></p>
           <p><i class="fa fa-heart-o" aria-hidden="true"></i> <span id="villian-life"></span></p>
           <p>Attack:<span id="villian-attack"></span></p>
+          <p>Accuracy:<span id="villian-current-accuracy"></span></p>
         </div>
       </div>
       <div class="battle-display">
+        <ul>
+          <li>Score: <strong><span id="player-score"></span></strong></li>
+          <li>Round <strong><span id="round-no"></span></strong></li>
+          <li>Highscore: <strong><span class="high-score"></span></strong></li>
+        </ul>
         <button id="attack"><i class="fa fa-bolt" aria-hidden="true"></i>  Attack</button>
         <button id="warcry"><i class="fa fa-bullseye" aria-hidden="true"></i> War Cry</button>
         <button id="defend"><i class="fa fa-shield" aria-hidden="true"></i> Defend</button>
-        <h2 id="round-no">Round</h2>
         <p id="turn-result"></p>
         <p id="round-message"></p>
       </div>
