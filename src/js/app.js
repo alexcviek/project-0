@@ -51,7 +51,7 @@ $(() => {
       currentAccuracy: 0.3
     },
     {
-      name: 'Xenomorph XX121',
+      name: 'Xenomorph',
       image: 'public/assets/images/villian2.gif',
       attack: 5,
       accuracy: 0.3,
@@ -171,6 +171,7 @@ $(() => {
     playerChosen = characters[id];
     villianChosen = villians[id];
     $('.chosen-character img, .player-img').attr('src', playerChosen.image);
+    $('.hexagon').css('background-image', `url(${playerChosen.image})`);
     $villianImg.attr('src', villianChosen.image);
     $villianName.text(villianChosen.name);
     $villianAttack.text(villianChosen.attack);
@@ -256,7 +257,7 @@ $(() => {
     } else if (playerChosen.name === 'Ellen Ripley'){
       $getAway.play();
     }
-    $turnResult.text('AAAAAAAAAAAAAAAAAAAaaaaaaa!!!!');
+    $turnResult.text('You have used WarCry');
     turn = false;
     whoseTurn();
     playerChosen.currentAttack += playerChosen.warCry;

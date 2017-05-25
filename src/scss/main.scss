@@ -53,7 +53,7 @@ main{
     }
     .choices{
       width: 400px;
-      height: 270px;
+      height: 280px;
       margin: 0 auto;
       border: 2px solid #204215;
       border-radius: 5px;
@@ -85,12 +85,76 @@ main{
     }
   }
   .chosen-character{
-    img{
-      border: 2px solid #204215;
-      border-radius: 5px;
-      max-width: 150px;
+    form, button{
+      position: relative;
+      top: 30px;
+    }
+    .hexagon {
       position: relative;
       left: 35%;
+      top: 20px;
+      width: 150px;
+      height: 86.60px;
+      margin: 43.30px 0;
+      background-image: url('');
+      background-size: auto 161.6581px;
+      background-position: center;
+      border-left: double 5px #333333;
+      border-right: double 5px #333333;
+    }
+    .hexTop,
+    .hexBottom {
+      position: absolute;
+      z-index: 1;
+      width: 106.07px;
+      height: 106.07px;
+      overflow: hidden;
+      -webkit-transform: scaleY(0.5774) rotate(-45deg);
+      -ms-transform: scaleY(0.5774) rotate(-45deg);
+      transform: scaleY(0.5774) rotate(-45deg);
+      background: inherit;
+      left: 16.97px;
+    }
+    /*counter transform the bg image on the caps*/
+    .hexTop:after,
+    .hexBottom:after {
+      content: "";
+      position: absolute;
+      width: 140.0000px;
+      height: 80.82903768654762px;
+      -webkit-transform:  rotate(45deg) scaleY(1.7321) translateY(-40.4145px);
+      -ms-transform:      rotate(45deg) scaleY(1.7321) translateY(-40.4145px);
+      transform:          rotate(45deg) scaleY(1.7321) translateY(-40.4145px);
+      -webkit-transform-origin: 0 0;
+      -ms-transform-origin: 0 0;
+      transform-origin: 0 0;
+      background: inherit;
+    }
+    .hexTop {
+      top: -53.0330px;
+      border-top: double 7.0711px #333333;
+      border-right: double 7.0711px #333333;
+    }
+    .hexTop:after {
+      background-position: center top;
+    }
+    .hexBottom {
+      bottom: -53.0330px;
+      border-bottom: double 7.0711px #333333;
+      border-left: double 7.0711px #333333;
+    }
+    .hexBottom:after {
+      background-position: center bottom;
+    }
+    .hexagon:after {
+      content: "";
+      position: absolute;
+      top: 2.8868px;
+      left: 0;
+      width: 140.0000px;
+      height: 80.8290px;
+      z-index: 2;
+      background: inherit;
     }
   }
   .game-window{
@@ -135,11 +199,11 @@ main{
       }
     }
   }
+  .hidden{
+    display: none;
+  }
 }
-.hidden{
-  display: none;
-}
-@media only screen and (max-width: 667px) {
+@media only screen and (max-width: 700px) {
   header{
     display: none;
   }
@@ -152,7 +216,7 @@ main{
       width: 500px;
       height: 350px;
       img{
-        max-width: 80px;
+        max-width: 70px;
       }
       h2{
         margin-top: 30px;
@@ -173,18 +237,18 @@ main{
     }
     .character-screen{
       height: 400px;
+      h2{
+        margin-top: 10px;
+      }
       .choices{
         border: none;
         p{
           font-size: 10px;
         }
       }
-      h2{
-        margin-top: 20px;
-      }
       button{
         position: relative;
-        bottom: 60px;
+        bottom: 70px;
       }
     }
     .chosen-character{
@@ -192,6 +256,18 @@ main{
         max-width: 100px;
         position: relative;
         left: 40%;
+      }
+      form{
+        width: 320px;
+      }
+      label, input{
+        display: inline;
+      }
+      button{
+        display: block;
+        position: relative;
+        top: -46px;
+        left: 150px;
       }
     }
     .game-window{
@@ -207,6 +283,7 @@ main{
         margin-top: 10px;
       }
       .players-display{
+        height: 150px;
         p{
           margin-top: 10px;
           line-height: 12px;
