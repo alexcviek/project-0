@@ -10,7 +10,6 @@ game.roundText;
 game.round = 1;
 game.score = 0;
 game.highScore = localStorage.getItem('highScore') || 0;
-
 game.characters = [
   {
     name: 'Nick the Cat',
