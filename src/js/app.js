@@ -10,6 +10,7 @@ game.roundText;
 game.round = 1;
 game.score = 0;
 game.highScore = localStorage.getItem('highScore') || 0;
+
 //array of characters (in objects)
 game.characters = [
   {
@@ -43,6 +44,7 @@ game.characters = [
     currentAccuracy: 0.5
   }
 ];
+
 //array of villians in objects
 game.villians = [
   {
