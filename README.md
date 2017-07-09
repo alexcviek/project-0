@@ -6,7 +6,7 @@
 * _npm i_ to install dependencies
 * _gulp_ to compile the source code and open in browser
 * Note: You'll need to have _gulp-cli_ installed globally _npm i -g gulp-cli_
-* the game is deployed on Heroku too (http://http://safe-ravine-55690.herokuapp.com/)
+* the game is deployed on Heroku too (http://safe-ravine-55690.herokuapp.com/)
 
 ## Description
 Fun battle game, where instead of sophisticated weapons, you can just slap the opponent. 
